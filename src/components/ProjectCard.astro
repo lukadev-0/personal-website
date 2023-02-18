@@ -1,0 +1,25 @@
+---
+interface Props {
+  name: string;
+  href: string;
+}
+
+const { name, href } = Astro.props;
+---
+
+<article
+  class="transition p-4 rounded-md border border-neutral-700 hover:border-sky-700 hover:ring-4 ring-sky-600/10 overflow-hidden relative"
+>
+  <div class="mb-3" aria-hidden="true">
+    <slot name="icon" />
+  </div>
+
+  <div>
+    <h3 class="font-semibold text-neutral-200">{name}</h3>
+    <p class="text-neutral-400"><slot /></p>
+  </div>
+
+  <a href={href} class="absolute inset-0">
+    <span class="sr-only"></span>
+  </a>
+</article>

@@ -1,0 +1,60 @@
+---
+import "@fontsource/montserrat/variable.css";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+
+interface Props {
+  title: string;
+  social: {
+    title: string;
+    description: string;
+    type: string;
+    url: string;
+  };
+}
+
+const { title, social } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link id="favicon" rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={social.description} />
+    <title>{title}</title>
+
+    <meta property="og:title" content={social.title} />
+    <meta property="og:site_name" content="LukaDev" />
+    <meta property="og:description" content={social.description} />
+    <meta property="og:type" content={social.type} />
+    <meta property="og:url" content={social.url} />
+    <meta name="twitter:title" content={social.title} />
+    <meta name="twitter:description" content={social.description} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class="bg-black text-white">
+    <div class="min-h-screen">
+      <Header />
+
+      <main id="main-content" class="pt-16 max-w-screen-lg mx-auto px-4">
+        <slot />
+      </main>
+    </div>
+
+    <Footer />
+
+    <script>
+      const favicon = document.getElementById("favicon") as HTMLLinkElement;
+
+      function updateFavicon(dark: boolean) {
+        favicon.href = dark ? "/favicon-dark.svg" : "/favicon.svg";
+      }
+
+      const media = window.matchMedia("(prefers-color-scheme: dark)");
+      updateFavicon(media.matches);
+      media.addEventListener("change", (e) => updateFavicon(e.matches));
+    </script>
+  </body>
+</html>

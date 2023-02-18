@@ -1,15 +1,144 @@
 ---
+import ProjectCard from "../components/ProjectCard.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="I'm LukaDev"
+  social={{
+    title: "I'm LukaDev",
+    description:
+      "I'm a Full-Stack Web Developer and Roblox Scripter based in Belgium.",
+    type: "website",
+    url: "https://lukadev.vercel.app",
+  }}
+>
+  <section class="py-32">
+    <h1 class="text-4xl sm:text-6xl font-bold mb-4">
+      Hey,<br />
+      <span
+        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-fuchsia-400"
+      >
+        I'm LukaDev
+      </span>
+    </h1>
+
+    <p class="text-neutral-400 text-lg max-w-xs sm:text-xl sm:max-w-md">
+      I'm a Full-Stack Web Developer and Roblox Scripter based in Belgium.
+    </p>
+  </section>
+
+  <section class="mb-16" id="projects">
+    <h2 class="text-3xl font-semibold mb-4">My Projects</h2>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <li>
+        <ProjectCard
+          name="Random Quote Machine"
+          href="https://lukadev-randomquotes.vercel.app/"
+        >
+          <svg
+            viewBox="0 0 41 41"
+            aria-hidden="true"
+            fill="#0094FF"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-12 h-12"
+            slot="icon"
+          >
+            <path
+              d="M0.725479 20.1943V16.2881C0.725479 15.1017 0.935447 13.8431 1.35538 12.512C1.7898 11.1666 2.41247 9.87171 3.22338 8.6275C4.04877 7.36881 5.04069 6.27651 6.19913 5.35059L8.9794 7.60753C8.06713 8.90961 7.2707 10.2696 6.59011 11.6874C5.924 13.0907 5.59095 14.5954 5.59095 16.2013V20.1943H0.725479ZM11.8466 20.1943V16.2881C11.8466 15.1017 12.0565 13.8431 12.4765 12.512C12.9109 11.1666 13.5335 9.87171 14.3445 8.6275C15.1698 7.36881 16.1618 6.27651 17.3202 5.35059L20.1005 7.60753C19.1882 8.90961 18.3918 10.2696 17.7112 11.6874C17.0451 13.0907 16.712 14.5954 16.712 16.2013V20.1943H11.8466Z"
+            ></path>
+            <path
+              d="M40.7255 20.1943V24.1006C40.7255 25.2869 40.5155 26.5456 40.0956 27.8766C39.6612 29.2221 39.0385 30.5169 38.2276 31.7611C37.4022 33.0198 36.4103 34.1121 35.2518 35.0381L32.4716 32.7811C33.3838 31.479 34.1803 30.1191 34.8608 28.7013C35.527 27.2979 35.86 25.7933 35.86 24.1874V20.1943H40.7255ZM29.6044 20.1943V24.1006C29.6044 25.2869 29.3944 26.5456 28.9745 27.8766C28.5401 29.2221 27.9174 30.5169 27.1065 31.7611C26.2811 33.0198 25.2892 34.1121 24.1307 35.0381L21.3505 32.7811C22.2628 31.479 23.0592 30.1191 23.7398 28.7013C24.4059 27.2979 24.7389 25.7933 24.7389 24.1874V20.1943H29.6044Z"
+            ></path>
+          </svg>
+
+          A website with quotes!
+        </ProjectCard>
+      </li>
+
+      <li>
+        <ProjectCard
+          name="TaggedObject"
+          href="https://github.com/lukadev-0/tagged-object"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-12 h-12 text-red-500"
+            slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
+            ></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 6h.008v.008H6V6z"></path>
+          </svg>
+
+          A CollectionService utility for Roblox.
+        </ProjectCard>
+      </li>
+
+      <li>
+        <ProjectCard
+          name="Octocord"
+          href="https://github.com/lukadev-0/octocord"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 256 256"
+            aria-hidden="true"
+            class="h-12 w-12"
+            slot="icon"
+            ><path
+              d="M31.7207 78.6161C35.4987 42.2006 73.6514 4 128 4C182.349 4 220.504 42.2006 224.282 78.6161C226.651 101.452 222.454 126.907 210.171 156.425C208.707 159.943 207.573 163.654 206.753 167.453C208.521 167.66 210.252 167.615 211.912 167.283C229.873 163.69 236.386 182.029 212.437 185.713C210.033 186.083 207.606 186.083 205.152 185.784C205.182 186.66 205.228 187.532 205.289 188.399C212.347 192.282 221.776 196.141 234.675 189.908C252.412 181.336 266.511 209.835 231.05 214.21C224.883 214.971 218.609 214.413 212.208 212.973C217.081 221.181 224.306 225.936 233.397 224.115C257.962 219.195 266.151 247.401 233.397 252.447C216.954 254.98 200.205 242.08 182.709 228.604C165.353 215.236 147.26 201.301 128 201.301C108.74 201.301 90.6474 215.236 73.2913 228.604C55.7948 242.08 39.0464 254.98 22.6034 252.447C-10.1506 247.401 -1.96212 219.195 22.6034 224.115C31.6941 225.936 38.9197 221.181 43.7932 212.973C37.3913 214.413 31.117 214.971 24.95 214.21C-10.5113 209.835 3.58808 181.336 21.325 189.908C34.2249 196.142 43.6547 192.281 50.7133 188.398C50.7741 187.531 50.82 186.659 50.8507 185.784C48.3957 186.083 45.9675 186.083 43.5634 185.713C19.6144 182.029 26.1267 163.69 44.0884 167.283C45.7488 167.615 47.4808 167.66 49.2499 167.452C48.4297 163.653 47.2958 159.943 45.832 156.425C33.5493 126.907 29.3516 101.452 31.7207 78.6161Z"
+              fill="#818CF8"></path><path
+              d="M110.653 114.354C110.653 124.144 103.343 132.08 94.3265 132.08C85.3097 132.08 78 124.144 78 114.354C78 104.565 85.3097 96.6285 94.3265 96.6285C103.343 96.6285 110.653 104.565 110.653 114.354Z"
+              fill="#111111"></path><path
+              d="M178 114.354C178 124.144 170.69 132.08 161.673 132.08C152.657 132.08 145.347 124.144 145.347 114.354C145.347 104.565 152.657 96.6285 161.673 96.6285C170.69 96.6285 178 104.565 178 114.354Z"
+              fill="#111111"></path><path
+              d="M109.372 150.204H146.628C149.866 150.204 152.196 152.84 150.957 155.83C148.282 162.282 141.691 171.632 128 171.632C114.31 171.632 107.718 162.282 105.043 155.83C103.804 152.84 106.135 150.204 109.372 150.204Z"
+              fill="#111111"></path></svg
+          >
+
+          A work in progress Discord bot framework
+        </ProjectCard>
+      </li>
+
+      <li>
+        <ProjectCard name="Luau Course" href="https://luau-course.vercel.app/">
+          <svg
+            class="w-12 h-12"
+            viewBox="0 0 60 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            slot="icon"
+          >
+            <rect
+              x="15.8579"
+              y="5.5051"
+              width="40"
+              height="40"
+              transform="rotate(15 15.8579 5.5051)"
+              fill="#00A2FF"></rect>
+            <rect
+              x="32.6438"
+              y="17.3228"
+              width="16"
+              height="16"
+              transform="rotate(15 40.6438 17.3228)"
+              fill="white"></rect>
+          </svg>
+
+          A work in progress guide to Luau
+        </ProjectCard>
+      </li>
+    </ul>
+  </section>
+</Layout>
