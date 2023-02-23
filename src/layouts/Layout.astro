@@ -33,6 +33,18 @@ const { title, social } = Astro.props;
     <meta name="twitter:title" content={social.title} />
     <meta name="twitter:description" content={social.description} />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <script>
+      const favicon = document.getElementById("favicon") as HTMLLinkElement;
+
+      function updateFavicon(dark: boolean) {
+        favicon.href = dark ? "/favicon-dark.svg" : "/favicon.svg";
+      }
+
+      const media = window.matchMedia("(prefers-color-scheme: dark)");
+      updateFavicon(media.matches);
+      media.addEventListener("change", (e) => updateFavicon(e.matches));
+    </script>
   </head>
   <body class="bg-black text-white">
     <div class="min-h-screen">
@@ -46,15 +58,13 @@ const { title, social } = Astro.props;
     <Footer />
 
     <script>
-      const favicon = document.getElementById("favicon") as HTMLLinkElement;
+      import { webVitals } from "../lib/vitals";
 
-      function updateFavicon(dark: boolean) {
-        favicon.href = dark ? "/favicon-dark.svg" : "/favicon.svg";
+      if (import.meta.env.PUBLIC_VERCEL_ANALYTICS_ID) {
+        webVitals({
+          analyticsId: import.meta.env.PUBLIC_VERCEL_ANALYTICS_ID,
+        });
       }
-
-      const media = window.matchMedia("(prefers-color-scheme: dark)");
-      updateFavicon(media.matches);
-      media.addEventListener("change", (e) => updateFavicon(e.matches));
     </script>
   </body>
 </html>
