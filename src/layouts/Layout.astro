@@ -5,15 +5,16 @@ import Header from "../components/Header.astro";
 
 interface Props {
   title: string;
-  social: {
+  description: string;
+  mainContainerClass?: string;
+  social?: {
     title: string;
-    description: string;
     type: string;
     url: string;
   };
 }
 
-const { title, social } = Astro.props;
+const { title, description, mainContainerClass, social } = Astro.props;
 ---
 
 <html lang="en">
@@ -22,17 +23,23 @@ const { title, social } = Astro.props;
     <link id="favicon" rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={social.description} />
     <title>{title}</title>
+    <meta name="description" content={description} />
 
-    <meta property="og:title" content={social.title} />
-    <meta property="og:site_name" content="LukaDev" />
-    <meta property="og:description" content={social.description} />
-    <meta property="og:type" content={social.type} />
-    <meta property="og:url" content={social.url} />
-    <meta name="twitter:title" content={social.title} />
-    <meta name="twitter:description" content={social.description} />
-    <meta name="twitter:card" content="summary_large_image" />
+    {
+      social && (
+        <>
+          <meta property="og:title" content={social.title} />
+          <meta property="og:site_name" content="LukaDev" />
+          <meta property="og:description" content={description} />
+          <meta property="og:type" content={social.type} />
+          <meta property="og:url" content={social.url} />
+          <meta name="twitter:title" content={social.title} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:card" content="summary_large_image" />
+        </>
+      )
+    }
 
     <script>
       const favicon = document.getElementById("favicon") as HTMLLinkElement;
@@ -47,24 +54,19 @@ const { title, social } = Astro.props;
     </script>
   </head>
   <body class="bg-black text-white">
-    <div class="min-h-screen">
+    <div class="min-h-screen flex flex-col w-full">
       <Header />
 
-      <main id="main-content" class="pt-16 max-w-screen-lg mx-auto px-4">
+      <main
+        id="main-content"
+        class={`pt-16 w-full max-w-screen-lg mx-auto px-4${
+          mainContainerClass ? ` ${mainContainerClass}` : ""
+        }`}
+      >
         <slot />
       </main>
     </div>
 
     <Footer />
-
-    <script>
-      import { webVitals } from "../lib/vitals";
-
-      if (import.meta.env.PUBLIC_VERCEL_ANALYTICS_ID) {
-        webVitals({
-          analyticsId: import.meta.env.PUBLIC_VERCEL_ANALYTICS_ID,
-        });
-      }
-    </script>
   </body>
 </html>
