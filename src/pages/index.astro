@@ -81,7 +81,7 @@ export const prerender = true;
           .set("#anim", { opacity: 0, pointerEvents: "none" });
 
         const onScroll = () => {
-          if (window.scrollY > 0) {
+          if (window.scrollY > 30) {
             tl.kill();
             animatePage();
             gsap.to("#anim", { opacity: 0, pointerEvents: "none" });
