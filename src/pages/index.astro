@@ -41,57 +41,59 @@ export const prerender = true;
             );
         }
 
-        const tl = gsap.timeline();
+        setTimeout(() => {
+          const tl = gsap.timeline();
 
-        tl.to("#anim-text-hey", {
-          opacity: 1,
-          scale: 1,
-          duration: 0.5,
-          ease: "back",
-        })
-          .to("#anim-text-hey", { x: 0 }, "+=0.2")
-          .to(
-            "#anim-text-im",
-            {
-              x: 0,
-              opacity: 1,
-              duration: 0.5,
-            },
-            "<"
-          )
-          .to("#anim-text-lukadev", {
+          tl.to("#anim-text-hey", {
             opacity: 1,
-            scale: 1.1,
-            duration: 0.8,
-            ease: "power2.in",
+            scale: 1,
+            duration: 0.5,
+            ease: "back",
           })
-          .to(
-            "#anim-text-hey-wrapper",
-            {
-              scale: 1.5,
-              opacity: 0,
-              duration: 0.5,
+            .to("#anim-text-hey", { x: 0 }, "+=0.2")
+            .to(
+              "#anim-text-im",
+              {
+                x: 0,
+                opacity: 1,
+                duration: 0.5,
+              },
+              "<"
+            )
+            .to("#anim-text-lukadev", {
+              opacity: 1,
+              scale: 1.1,
+              duration: 0.8,
               ease: "power2.in",
-            },
-            "<"
-          )
-          .to("#anim-text-lukadev", { scale: 1.5 })
-          .to("#anim-text-lukadev", { opacity: 0 }, "<+=0.2")
-          .call(animatePage)
-          .set("#anim", { opacity: 0, pointerEvents: "none" });
+            })
+            .to(
+              "#anim-text-hey-wrapper",
+              {
+                scale: 1.5,
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.in",
+              },
+              "<"
+            )
+            .to("#anim-text-lukadev", { scale: 1.5 })
+            .to("#anim-text-lukadev", { opacity: 0 }, "<+=0.2")
+            .call(animatePage)
+            .set("#anim", { opacity: 0, pointerEvents: "none" });
 
-        const onScroll = () => {
-          if (window.scrollY > 30) {
-            tl.kill();
-            animatePage();
-            gsap.to("#anim", { opacity: 0, pointerEvents: "none" });
-            removeEventListener("scroll", onScroll);
-          }
-        };
-        addEventListener("scroll", onScroll);
-        onScroll();
+          const onScroll = () => {
+            if (window.scrollY > 30) {
+              tl.kill();
+              animatePage();
+              gsap.to("#anim", { opacity: 0, pointerEvents: "none" });
+              removeEventListener("scroll", onScroll);
+            }
+          };
+          addEventListener("scroll", onScroll);
+          onScroll();
 
-        tl.call(() => removeEventListener("scroll", onScroll));
+          tl.call(() => removeEventListener("scroll", onScroll));
+        }, 500);
       </script>
 
       <div
