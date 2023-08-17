@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["MontserratVariable", ...defaultTheme.fontFamily.sans],
+        sans: ["Montserrat Variable", ...defaultTheme.fontFamily.sans],
       },
     },
   },
