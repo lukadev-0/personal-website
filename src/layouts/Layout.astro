@@ -68,14 +68,5 @@ const { title, description, mainContainerClass, social } = Astro.props;
     </div>
 
     <Footer />
-
-    <script>
-      import { webVitals } from "../lib/vitals";
-      if (import.meta.env.PUBLIC_VERCEL_ANALYTICS_ID) {
-        webVitals({
-          analyticsId: import.meta.env.PUBLIC_VERCEL_ANALYTICS_ID,
-        });
-      }
-    </script>
   </body>
 </html>
