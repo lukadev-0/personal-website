@@ -15,113 +15,6 @@ export const prerender = true;
   }}
 >
   <section class="py-32">
-    <div
-      aria-hidden="true"
-      id="anim"
-      class="fixed w-full h-screen top-0 bg-black left-0 z-10 select-none overflow-hidden"
-    >
-      <script>
-        // Intro animation
-
-        import gsap from "gsap";
-
-        function animatePage() {
-          gsap
-            .timeline()
-            .from("#hero > *", {
-              opacity: 0,
-              y: "+=8",
-              stagger: 0.1,
-            })
-            .from("#projects h2", { opacity: 0, y: "+=16" })
-            .from(
-              "#projects ul > *",
-              { opacity: 0, stagger: 0.1, y: "+=8" },
-              "<+=0.2"
-            );
-        }
-
-        setTimeout(() => {
-          const tl = gsap.timeline();
-
-          tl.to("#anim-text-hey", {
-            opacity: 1,
-            scale: 1,
-            duration: 0.5,
-            ease: "back",
-          })
-            .to("#anim-text-hey", { x: 0 }, "+=0.2")
-            .to(
-              "#anim-text-im",
-              {
-                x: 0,
-                opacity: 1,
-                duration: 0.5,
-              },
-              "<"
-            )
-            .to("#anim-text-lukadev", {
-              opacity: 1,
-              scale: 1.1,
-              duration: 0.8,
-              ease: "power2.in",
-            })
-            .to(
-              "#anim-text-hey-wrapper",
-              {
-                scale: 1.5,
-                opacity: 0,
-                duration: 0.5,
-                ease: "power2.in",
-              },
-              "<"
-            )
-            .to("#anim-text-lukadev", { scale: 1.5 })
-            .to("#anim-text-lukadev", { opacity: 0 }, "<+=0.2")
-            .call(animatePage)
-            .set("#anim", { opacity: 0, pointerEvents: "none" });
-
-          const onScroll = () => {
-            if (window.scrollY > 30) {
-              tl.kill();
-              animatePage();
-              gsap.to("#anim", { opacity: 0, pointerEvents: "none" });
-              removeEventListener("scroll", onScroll);
-            }
-          };
-          addEventListener("scroll", onScroll);
-          onScroll();
-
-          tl.call(() => removeEventListener("scroll", onScroll));
-        }, 500);
-      </script>
-
-      <div
-        id="anim-text-hey-wrapper"
-        class="absolute left-1/2 top-1/2 text-2xl sm:text-4xl md:text-6xl lg:text-8xl font-bold -translate-x-1/2 -translate-y-1/2"
-      >
-        <span
-          id="anim-text-hey"
-          class="inline-block"
-          style={{ opacity: 0, transform: "translateX(50%) scale(0.1)" }}
-          >Hey!</span
-        >
-        <span
-          id="anim-text-im"
-          class="inline-block"
-          style={{ opacity: 0, transform: "translateX(70%)" }}>I'm</span
-        >
-      </div>
-
-      <div
-        class="text-center absolute left-1/2 top-1/2 text-3xl md:text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-fuchsia-400"
-        style={{ opacity: 0, transform: "translate(-50%, -50%) scale(0.4)" }}
-        id="anim-text-lukadev"
-      >
-        LukaDev
-      </div>
-    </div>
-
     <div id="hero">
       <h1 class="text-4xl sm:text-6xl font-bold mb-4">
         Hey!<br />
@@ -348,4 +241,22 @@ export const prerender = true;
       </li>
     </ul>
   </section>
+
+  <script>
+    import gsap from "gsap";
+
+    gsap
+      .timeline()
+      .from("#hero > *", {
+        opacity: 0,
+        y: "+=8",
+        stagger: 0.1,
+      })
+      .from("#projects h2", { opacity: 0, y: "+=16" })
+      .from(
+        "#projects ul > *",
+        { opacity: 0, stagger: 0.1, y: "+=8" },
+        "<+=0.2"
+      );
+  </script>
 </Layout>

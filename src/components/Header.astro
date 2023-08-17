@@ -1,21 +1,22 @@
 ---
 import FullLogo from "./FullLogo.astro";
+import Logo from "./Logo.astro";
 import GitHub from "./social-icons/GitHub.astro";
 import Mastodon from "./social-icons/Mastodon.astro";
 import X from "./social-icons/X.astro";
 ---
 
-<header class="fixed top-0 w-full bg-black/80 backdrop-blur-sm z-50">
-  <div class="mx-auto h-16 max-w-screen-lg flex items-center relative px-4">
+<header>
+  <div class="pt-8 flex items-center mx-auto max-w-screen-lg px-4 relative z-50" id="header-top">
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute bg-white text-black focus:px-2 focus:py-1 font-semibold inline-block"
+      class="sr-only focus:not-sr-only focus:absolute bg-white text-black focus:px-2 focus:py-1 font-semibold inline-block z-50"
     >
       Skip navigation
     </a>
 
     <a href="/" aria-label="LukaDev Homepage">
-      <FullLogo aria-hidden="true" class="h-6 sm:h-8" />
+      <FullLogo aria-hidden="true" class="h-8" />
     </a>
 
     <a
@@ -48,4 +49,53 @@ import X from "./social-icons/X.astro";
       <Mastodon />
     </a>
   </div>
+
+  <nav id="header-nav" class="h-16 w-full absolute">
+    <div id="header-sticky" class="left-0 right-0 h-16 w-full top-0 z-50 bg-black/80 backdrop-blur border-b-transparent transition duration-500 overflow-hidden">
+      <div class="w-full max-w-screen-lg mx-auto flex items-center h-full px-4 space-x-6">
+        <div id="header-nav-logo" class="transition duration-300" style="opacity: 0; transform: translateX(-50%)">
+          <Logo />
+        </div>
+        <div id="header-nav-links" class="flex items-center space-x-6 transition duration-500" style="transform: translateX(-3.5rem)">
+          <a class="font-medium text-neutral-500 hover:text-neutral-300" href="/">Home</a>
+          <a class="font-medium text-neutral-500 hover:text-neutral-300" href="/#projects">Projects</a>
+          <a class="font-medium text-neutral-500 hover:text-neutral-300" href="/blog">Blog</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    const nav = document.getElementById("header-nav");
+    const sticky = document.getElementById("header-sticky");
+    const logo = document.getElementById("header-nav-logo");
+    const links = document.getElementById("header-nav-links");
+
+    function callback(entries) {
+      for (const entry of entries) {
+        console.log(entry)
+        if (entry.isIntersecting) {
+          sticky.style.position = "";
+          sticky.style.borderBottom = "1px solid rgba(128, 128, 128, 0.08)";
+          logo.style.opacity = 0;
+          logo.style.transform = "translateX(-50%)";
+          logo.style.transitionDelay = "0ms";
+          links.style.transform = "translateX(-3.5rem)";
+        } else {
+          sticky.style.position = "fixed";
+          sticky.style.borderBottom = "1px solid rgba(128, 128, 128, 0.15)"
+          logo.style.opacity = 1;
+          logo.style.transform = "translateX(0)";
+          logo.style.transitionDelay = "150ms";
+          links.style.transform = "translateX(0)";
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver(callback, {
+      threshold: 1,
+    });
+
+    observer.observe(nav);
+  </script>
 </header>
