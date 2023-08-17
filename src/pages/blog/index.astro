@@ -1,0 +1,44 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const allBlogPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Layout
+  title="Blog - LukaDev"
+  description="My thoughts on software development."
+  social={{
+    title: "Blog",
+    type: "article",
+    url: "https://lukadev.me/blog"
+  }}
+>
+  <h1 class="text-5xl font-bold mt-24 mb-4">Blog</h1>
+  <div class="mb-10 text-neutral-400 font-medium">
+    <a href="/rss.xml" aria-label="RSS feed" class="inline-block">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+        <path d="M3.75 3a.75.75 0 00-.75.75v.5c0 .414.336.75.75.75H4c6.075 0 11 4.925 11 11v.25c0 .414.336.75.75.75h.5a.75.75 0 00.75-.75V16C17 8.82 11.18 3 4 3h-.25z" />
+        <path d="M3 8.75A.75.75 0 013.75 8H4a8 8 0 018 8v.25a.75.75 0 01-.75.75h-.5a.75.75 0 01-.75-.75V16a6 6 0 00-6-6h-.25A.75.75 0 013 9.25v-.5zM7 15a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    </a>
+  </div>
+
+  {allBlogPosts.map(post => (
+    <article class="relative max-w-prose my-6 group">
+      <h2 class="text-lg font-semibold text-neutral-200">
+        <a href={`/blog/${post.slug}`} class="after:content-[''] after:absolute after:inset-0">
+          {post.data.title}
+        </a>
+      </h2>
+      <p class="text-neutral-400 mb-1">{post.data.description}</p>
+
+      <div>
+        <time class="text-sm text-neutral-500" datetime={post.data.date.toISOString()}>
+          {post.data.date.toDateString()}
+        </time>
+      </div>
+    </article>
+  ))}
+</Layout>

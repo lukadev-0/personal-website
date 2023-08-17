@@ -1,0 +1,108 @@
+---
+title: Making a blog with Astro Content Collections
+description: I added a blog to my website, and here's how I did it.
+date: 2023-08-17
+---
+
+# Making a blog with Astro Content Collections
+
+So I added a blog to my website.
+
+This blog uses the [Content Collections](https://docs.astro.build/en/guides/content-collections)
+feature introduced in version 2.0.0 of [Astro](https://astro.build), the framework I used for this website.
+
+## What are Content Collections
+
+Content Collections are a way to manage, well... content! In this case a blog.
+
+It manages reading all the files, parsing the frontmatter in the markdown,
+and rendering the markdown itself into HTML. It's quite similar to
+[Contentlayer](https://www.contentlayer.dev/).
+
+Content Collections allow you to define a schema for the frontmatter using [Zod](https://zod.dev/),
+which is an amazing schema validation library which generates TypeScript types from your schema.
+
+If you're wondering what frontmatter is, it's basically a way to attach metadata, such as the title
+or description to a markdown document.
+
+```md
+---
+title: Making a blog with Astro Content Collections
+description: I added a blog to my website, and here's how I did it.
+date: 2023-08-17
+---
+
+# Making a blog with Astro Content Collections
+```
+
+## The `astro:content` module
+
+In order to retrieve our blog posts and the additional frontmatter we defined, we can use the
+`astro:content` module, which exposes functions like `getCollection()` and `getEntry()` that allows
+us to fetch the content.
+
+The parameter and return values of these functions are automatically generated based on the Zod schema,
+giving us autocomplete and typechecking.
+
+## Implementing it into the site
+
+Implementing all this was quite easy! I used [MDX](https://mdxjs.com/) instead of regular markdown,
+which will allow me to add extra elements using JSX if I need to.
+
+I placed all the blog posts within the `src/content/blog` directory, and then I defined the schema
+for the frontmatter within `src/content/config.ts`.
+
+In order to generate the [`/blog`](/blog) page with the list of posts, I used the `getCollection()`
+function and mapped over the result.
+
+```astro
+---
+import { getCollection } from "astro:content";
+
+// Returns an array of objects containing
+// information about each post.
+const allBlogPosts = (await getCollection("blog"))
+  // Sort the posts by time from newest to oldest
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<main>
+  {allBlogPosts.map(post => (
+    <article>
+        <h2>
+            <a href={`/blog/${post.slug}`}>{post.title}</a>
+        </h2>
+        <p>{post.description}</p>
+    </article>
+  ))}
+</main>
+```
+
+To implement the individual pages for each blog post, I created a file at `src/pages/blog/[...slug].astro`
+and used Astro's [`getStaticPaths()`](https://docs.astro.build/en/reference/api-reference/#getstaticpaths)
+function, which allows you to dynamically create pages from data.
+
+To render the post I used the `post.render()` function, which returns an object with a `Content` component
+containing the rendered HTML of the post.
+
+```astro
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allBlogPosts = await getCollection('blog');
+  return allBlogPosts.map(post => ({
+    params: { slug: post.slug }, props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Content />
+```
+
+And that's it!
+
+The finished source code is available on [GitHub](https://github.com/lukadev-0/personal-website).

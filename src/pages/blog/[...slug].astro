@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const allBlogPosts = await getCollection("blog");
+  return allBlogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout
+  title={`${post.data.title} - LukaDev`}
+  description={post.data.description}
+  social={{
+    title: post.data.title,
+    type: "article",
+    url: `https://lukadev.me/blog/${post.slug}`,
+  }}
+>
+  <article class="prose lg:prose-lg prose-invert py-20">
+    <time class="text-sm text-neutral-500" datetime={post.data.date.toISOString()}>
+      {post.data.date.toDateString()}
+    </time>
+    <Content />
+  </article>
+</Layout>
