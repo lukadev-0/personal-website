@@ -73,7 +73,6 @@ import X from "./social-icons/X.astro";
 
     function callback(entries) {
       for (const entry of entries) {
-        console.log(entry)
         if (entry.isIntersecting) {
           sticky.style.position = "";
           sticky.style.borderBottom = "1px solid rgba(128, 128, 128, 0.08)";
