@@ -20,7 +20,7 @@ and rendering the markdown itself into HTML. It's quite similar to
 [Contentlayer](https://www.contentlayer.dev/).
 
 Content Collections allow you to define a schema for the frontmatter using [Zod](https://zod.dev/),
-which is an amazing schema validation library which generates TypeScript types from your schema.
+which is an amazing schema validation library that infers TypeScript types from your schema.
 
 If you're wondering what frontmatter is, it's basically a way to attach metadata, such as the title
 or description to a markdown document.
@@ -41,7 +41,7 @@ In order to retrieve our blog posts and the additional frontmatter we defined, w
 `astro:content` module, which exposes functions like `getCollection()` and `getEntry()` that allows
 us to fetch the content.
 
-The parameter and return values of these functions are automatically generated based on the Zod schema,
+The parameter and return values of these functions are automatically inferred based on the Zod schema,
 giving us autocomplete and typechecking.
 
 ## Implementing it into the site
@@ -51,6 +51,27 @@ which will allow me to add extra elements using JSX if I need to.
 
 I placed all the blog posts within the `src/content/blog` directory, and then I defined the schema
 for the frontmatter within `src/content/config.ts`.
+
+```ts
+import { z, defineCollection } from "astro:content";
+
+// Create a content collection for the blog
+const blogCollection = defineCollection({
+  type: "content",
+
+  // Zod schema to validate the frontmatter
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.date(),
+  }),
+});
+
+// Export an object containing all the collections
+export const collections = {
+  blog: blogCollection,
+};
+```
 
 In order to generate the [`/blog`](/blog) page with the list of posts, I used the `getCollection()`
 function and mapped over the result.
@@ -87,10 +108,10 @@ containing the rendered HTML of the post.
 
 ```astro
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const allBlogPosts = await getCollection('blog');
+  const allBlogPosts = await getCollection("blog");
   return allBlogPosts.map(post => ({
     params: { slug: post.slug }, props: { post },
   }));
