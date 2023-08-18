@@ -24,7 +24,10 @@ const { Content } = await post.render();
   }}
 >
   <article class="prose lg:prose-lg prose-invert py-20">
-    <time class="text-sm text-neutral-500" datetime={post.data.date.toISOString()}>
+    <time
+      class="text-neutral-400 font-medium"
+      datetime={post.data.date.toISOString()}
+    >
       {post.data.date.toDateString()}
     </time>
     <Content />
