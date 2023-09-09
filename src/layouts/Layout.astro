@@ -2,6 +2,7 @@
 import "@fontsource-variable/montserrat";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -53,6 +54,8 @@ const { title, description, mainContainerClass, social } = Astro.props;
       updateFavicon(media.matches);
       media.addEventListener("change", (e) => updateFavicon(e.matches));
     </script>
+
+    <ViewTransitions />
   </head>
   <body class="bg-black text-white">
     <div class="min-h-screen flex flex-col w-full">
