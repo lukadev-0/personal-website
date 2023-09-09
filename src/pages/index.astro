@@ -245,22 +245,24 @@ export const prerender = true;
   <script>
     import gsap from "gsap";
 
-    gsap
-      .timeline()
-      .from("#hero > *", {
-        opacity: 0,
-        y: "+=8",
-        stagger: 0.1,
-      })
-      .from("#projects h2", { opacity: 0, y: "+=16" })
-      .from(
-        "#projects ul > *",
-        { opacity: 0, stagger: 0.1, y: "+=8" },
-        "<+=0.2"
-      );
+    document.addEventListener("astro:page-load", () => {
+      gsap
+        .timeline()
+        .from("#hero > *", {
+          opacity: 0,
+          y: "+=8",
+          stagger: 0.1,
+        })
+        .from("#projects h2", { opacity: 0, y: "+=16" })
+        .from(
+          "#projects ul > *",
+          { opacity: 0, stagger: 0.1, y: "+=8" },
+          "<+=0.2"
+        );
 
-    for (const section of document.querySelectorAll("section")) {
-      section.style.visibility = "visible";
-    }
+      for (const section of document.querySelectorAll("section")) {
+        section.style.visibility = "visible";
+      }
+    });
   </script>
 </Layout>
