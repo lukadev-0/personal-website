@@ -14,7 +14,7 @@ export const prerender = true;
     url: "https://lukadev.me",
   }}
 >
-  <section class="py-32">
+  <section class="py-32 invisible">
     <div id="hero">
       <h1 class="text-4xl sm:text-6xl font-bold mb-4">
         Hey!<br />
@@ -31,7 +31,7 @@ export const prerender = true;
     </div>
   </section>
 
-  <section class="mb-16" id="projects">
+  <section class="mb-16 invisible" id="projects">
     <h2 class="text-3xl font-semibold mb-4">My Projects</h2>
     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <li>
@@ -258,5 +258,9 @@ export const prerender = true;
         { opacity: 0, stagger: 0.1, y: "+=8" },
         "<+=0.2"
       );
+
+    for (const section of document.querySelectorAll("section")) {
+      section.style.visibility = "visible";
+    }
   </script>
 </Layout>
