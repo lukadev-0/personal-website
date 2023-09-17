@@ -5,8 +5,8 @@ export async function get() {
   const posts = await getCollection("blog");
 
   return rss({
-    title: "LukaDev's Blog",
-    description: "My thoughts on software development.",
+    title: "lukadev's blog",
+    description: "my thoughts on software development.",
     site: "https://lukadev.me/",
     items: posts.map((post) => ({
       title: post.data.title,
