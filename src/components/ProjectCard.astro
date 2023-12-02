@@ -7,26 +7,26 @@ interface Props {
 const { name, href } = Astro.props;
 ---
 
-<article
-  class="h-full transition p-4 rounded-md border border-neutral-900 hover:border-sky-700 focus-within:border-sky-700 focus-within:ring-4 ring-sky-600/10 overflow-hidden relative"
+<a
+  class="project-card group/card block h-full p-px rounded-md bg-[#020202] hover:bg-neutral-800 overflow-hidden relative transition duration-700 outline-none focus:bg-neutral-500 before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(circle_250px_at_var(--cursor-x)_var(--cursor-y),#ffffff20_0,transparent_50%)] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-1000"
+  href={href}
 >
-  <div class="mb-3" aria-hidden="true">
-    <slot name="icon" />
-  </div>
-
-  <div>
+  <div class="p-6 bg-[#020202] overflow-hidden relative rounded-[0.3125rem] hover:bg-[#050505] group-focus/card:bg-[#050505] transition duration-700">
     <h3 class="font-semibold text-neutral-200">{name}</h3>
     <p class="text-neutral-400"><slot /></p>
   </div>
+</a>
 
-  <a
-    href={href}
-    class="absolute inset-0"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <span class="sr-only">
-      View {name}
-    </span>
-  </a>
-</article>
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const cards: NodeListOf<HTMLDivElement> = document.querySelectorAll(".project-card");
+
+    (document.querySelector(".project-cards") as HTMLDivElement)?.addEventListener("mousemove", (event: MouseEvent) => {
+      for (const card of cards) {
+        const { left, top } = card.getBoundingClientRect();
+        card.style.setProperty("--cursor-x", `${event.clientX - left}px`)
+        card.style.setProperty("--cursor-y", `${event.clientY - top}px`)
+      }
+    })
+  });
+</script>

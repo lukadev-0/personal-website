@@ -14,42 +14,26 @@ export const prerender = true;
     url: "https://lukadev.me",
   }}
 >
-  <section class="py-32 invisible">
+  <section class="pb-36 pt-40">
     <div id="hero">
       <h1 class="text-4xl sm:text-5xl font-bold mb-4 text-gray-300">
-        hi, I'm <span class="text-white font-extrabold">lukadev</span>.
+        hi, i'm <span class="text-white font-extrabold">lukadev</span>.
       </h1>
 
       <p class="text-neutral-400 text-lg max-w-xs sm:text-xl sm:max-w-md">
-        Full-stack web developer and Roblox scripter based in Belgium.
+        I enjoy web development and Roblox scripting, and I live in Belgium.
       </p>
     </div>
   </section>
 
-  <section class="mb-16 invisible" id="projects">
-    <h2 class="text-2xl font-bold mb-4">my stuff</h2>
-    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <section class="mb-32" id="projects">
+    <h2 class="text-2xl font-bold mb-4">projects</h2>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 group project-cards">
       <li>
         <ProjectCard
           name="Random Quote Machine"
           href="https://quote.lukadev.me/"
         >
-          <svg
-            viewBox="0 0 41 41"
-            aria-hidden="true"
-            fill="#0094FF"
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-12 h-12"
-            slot="icon"
-          >
-            <path
-              d="M0.725479 20.1943V16.2881C0.725479 15.1017 0.935447 13.8431 1.35538 12.512C1.7898 11.1666 2.41247 9.87171 3.22338 8.6275C4.04877 7.36881 5.04069 6.27651 6.19913 5.35059L8.9794 7.60753C8.06713 8.90961 7.2707 10.2696 6.59011 11.6874C5.924 13.0907 5.59095 14.5954 5.59095 16.2013V20.1943H0.725479ZM11.8466 20.1943V16.2881C11.8466 15.1017 12.0565 13.8431 12.4765 12.512C12.9109 11.1666 13.5335 9.87171 14.3445 8.6275C15.1698 7.36881 16.1618 6.27651 17.3202 5.35059L20.1005 7.60753C19.1882 8.90961 18.3918 10.2696 17.7112 11.6874C17.0451 13.0907 16.712 14.5954 16.712 16.2013V20.1943H11.8466Z"
-            ></path>
-            <path
-              d="M40.7255 20.1943V24.1006C40.7255 25.2869 40.5155 26.5456 40.0956 27.8766C39.6612 29.2221 39.0385 30.5169 38.2276 31.7611C37.4022 33.0198 36.4103 34.1121 35.2518 35.0381L32.4716 32.7811C33.3838 31.479 34.1803 30.1191 34.8608 28.7013C35.527 27.2979 35.86 25.7933 35.86 24.1874V20.1943H40.7255ZM29.6044 20.1943V24.1006C29.6044 25.2869 29.3944 26.5456 28.9745 27.8766C28.5401 29.2221 27.9174 30.5169 27.1065 31.7611C26.2811 33.0198 25.2892 34.1121 24.1307 35.0381L21.3505 32.7811C22.2628 31.479 23.0592 30.1191 23.7398 28.7013C24.4059 27.2979 24.7389 25.7933 24.7389 24.1874V20.1943H29.6044Z"
-            ></path>
-          </svg>
-
           A website with quotes!
         </ProjectCard>
       </li>
@@ -59,205 +43,33 @@ export const prerender = true;
           name="TaggedObject"
           href="https://github.com/lukadev-0/tagged-object"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-12 h-12 text-red-500"
-            slot="icon"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
-            ></path>
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 6h.008v.008H6V6z"></path>
-          </svg>
-
           A CollectionService utility for Roblox.
         </ProjectCard>
       </li>
 
       <li>
         <ProjectCard name="Luau Guide" href="https://luau-guide.vercel.app/">
-          <svg
-            class="w-12 h-12"
-            viewBox="0 0 60 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            slot="icon"
-          >
-            <rect
-              x="15.8579"
-              y="5.5051"
-              width="40"
-              height="40"
-              transform="rotate(15 15.8579 5.5051)"
-              fill="#00A2FF"></rect>
-            <rect
-              x="32.6438"
-              y="17.3228"
-              width="16"
-              height="16"
-              transform="rotate(15 40.6438 17.3228)"
-              fill="white"></rect>
-          </svg>
-
           A work in progress guide to Luau
         </ProjectCard>
       </li>
 
       <li>
         <ProjectCard name="Discokit" href="https://discokit.vercel.app/">
-          <svg
-            class="w-12 h-12"
-            viewBox="0 0 48 48"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            slot="icon"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M5.33334 34.6667V40H15.5865C18.9058 40 21.789 39.3271 24.2363 37.9812C26.7117 36.6067 28.6245 34.7168 29.9747 32.3114C31.3249 29.8774 32 27.0998 32 23.9785C32 20.8286 31.3249 18.0653 29.9747 15.6886C28.6245 13.2832 26.7117 11.4076 24.2363 10.0617C21.789 8.68725 18.9058 8 15.5865 8H5.33334V13.3333H12H16C18.1378 13.3333 19.6934 13.5982 21.2405 14.4859C22.8158 15.3736 24.0394 16.6192 24.9114 18.2228C25.7834 19.8264 26.2194 21.745 26.2194 23.9785C26.2194 26.1834 25.7834 28.102 24.9114 29.7342C24.0394 31.3378 22.8158 32.5978 21.2405 33.5141C19.6934 34.4018 18.1378 34.6667 16 34.6667H10.6667H5.33334Z"
-              fill="white"></path>
-            <rect
-              x="5.33334"
-              y="10.6667"
-              width="5.33333"
-              height="21.3333"
-              fill="url(#paint0_linear_101_2)"></rect>
-            <path
-              d="M8 34.6667L8 40L-4.71546e-07 40L-2.38419e-07 34.6667L8 34.6667Z"
-              fill="url(#paint1_linear_101_2)"></path>
-            <defs>
-              <linearGradient
-                id="paint0_linear_101_2"
-                x1="8"
-                y1="10.6667"
-                x2="8"
-                y2="32"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop offset="0.473958" stop-color="white"></stop>
-                <stop offset="1" stop-color="white" stop-opacity="0"></stop>
-              </linearGradient>
-              <linearGradient
-                id="paint1_linear_101_2"
-                x1="8"
-                y1="37.2417"
-                x2="-1.18366e-07"
-                y2="37.2417"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop offset="0.473958" stop-color="white"></stop>
-                <stop offset="1" stop-color="white" stop-opacity="0"></stop>
-              </linearGradient>
-            </defs>
-          </svg>
-
           A library for the Discord API.
         </ProjectCard>
       </li>
 
       <li>
         <ProjectCard name="Bird" href="https://bird.lukadev.me/">
-          <svg
-            class="w-12 h-12"
-            viewBox="0 0 36 36"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            slot="icon"
-          >
-            <path
-              fill="#FFAC33"
-              d="M8.916 12.88c-.111 1.652 1.768 3.126-.712 2.959c-2.48-.167-7.836-2.533-7.768-3.53s3.708-2.757 6.188-2.59c2.48.166 2.404 1.508 2.292 3.161zm20.122 16.049a.966.966 0 0 0-.564.095c-2.325.232-3.225-1.885-3.225-1.885c-.439-.336-.981-2.009-1.589-1.215l.187 1.402c.187 1.402 2.57 3.224 2.57 3.224l-1.215 1.589a1 1 0 1 0 1.589 1.215l.673-.88l-.039.249a1 1 0 1 0 1.976.314l.47-2.963a1.003 1.003 0 0 0-.833-1.145zm-6.278.623a.984.984 0 0 0-.572.018c-2.335-.082-2.944-2.3-2.944-2.3c-.39-.392-.703-2.123-1.412-1.417l-.003 1.414c-.003 1.414 2.115 3.539 2.115 3.539l-1.417 1.412a.999.999 0 1 0 1.411 1.417l.785-.782l-.073.242a1 1 0 0 0 1.916.576l.862-2.873a.996.996 0 0 0-.668-1.246z"
-            ></path><path
-              fill="#DD2E44"
-              d="M35.009 6.729c-.383-.17-.758-.057-1.05.244c-.054.056-4.225 6.306-14.532 4.944c-.34-.045 3.139 11.968 3.199 11.962c.124-.014 3.07-.368 6.14-2.553c2.818-2.005 6.284-5.991 6.797-13.598c.028-.418-.171-.828-.554-.999z"
-            ></path><path
-              fill="#DD2E44"
-              d="M34.477 21.108c-.204-.336-.59-.56-.979-.471c-1.293.295-3.197.543-4.53.453c-6.357-.428-9.361-4.129-9.392-4.16c-.275-.282.466 11.552.816 11.576c9.194.62 13.862-6.027 14.057-6.31c.222-.326.233-.751.028-1.088z"
-            ></path><path
-              fill="#DD2E44"
-              d="M24.586 19.016c-.371 5.51 1.316 9.861-4.194 9.489c-5.51-.371-10.145-4.92-9.774-10.431s14.34-4.568 13.968.942z"
-            ></path><path
-              fill="#DD2E44"
-              d="M23.257 12.412c-.353 5.235-3.922 9.257-9.156 8.904c-5.235-.353-9.193-4.882-8.84-10.117c.353-5.235 4.832-8.444 10.067-8.091c4.001.269 8.24 4.683 7.929 9.304z"
-            ></path><circle cx="10.67" cy="8.989" r="2" fill="#292F33"
-            ></circle><path
-              fill="#A0041E"
-              d="M18.179 16.645s7.63 5.648 12.387-4.459c.396-.842 1.685.793.099 4.162s-8.175 6.44-12.04 1.536c-.815-1.035-.446-1.239-.446-1.239z"
-            ></path><path
-              fill="#DD2E44"
-              d="M15.327 3.107s6.246.254 7.798-.477s.136 2.932-3.262 3.789s-4.536-3.312-4.536-3.312z"
-            ></path><path
-              fill="#DD2E44"
-              d="M17.428 5.788s4.501.136 6.054-.594s.136 2.932-3.262 3.789c-3.399.857-2.792-3.195-2.792-3.195z"
-            ></path>
-          </svg>
-
           A social media app similar to Twitter/X.
         </ProjectCard>
       </li>
 
       <li>
-        <div
-          class="group h-full transition rounded-md border-2 border-neutral-800 hover:border-sky-700 focus-within:border-sky-700 focus-within:ring-4 ring-sky-600/10 overflow-hidden relative min-h-[120px] shadow-sky-600/20"
-        >
-          <a
-            href="https://github.com/lukadev-0?tab=repositories"
-            class="absolute inset-0 flex items-center justify-center font-medium p-4"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View more on GitHub
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6 ml-2 text-gray-400 group-hover:translate-x-1 transition"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
-            </svg>
-          </a>
-        </div>
+        <ProjectCard name="Persist" href="https://github.com/lukadev-0/rbx-persist">
+          A data store library for Roblox.
+        </ProjectCard>
       </li>
     </ul>
   </section>
-
-  <script>
-    import gsap from "gsap";
-
-    document.addEventListener("astro:page-load", () => {
-      gsap
-        .timeline()
-        .from("#hero > *", {
-          opacity: 0,
-          y: "+=8",
-          stagger: 0.1,
-        })
-        .from("#projects h2", { opacity: 0, y: "+=16" })
-        .from(
-          "#projects ul > *",
-          { opacity: 0, stagger: 0.1, y: "+=8" },
-          "<+=0.2"
-        );
-
-      for (const section of document.querySelectorAll("section")) {
-        section.style.visibility = "visible";
-      }
-    });
-  </script>
 </Layout>

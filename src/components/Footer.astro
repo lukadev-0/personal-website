@@ -1,10 +1,32 @@
-<footer class="border-t border-neutral-950 py-8">
-  <div class="max-w-screen-lg mx-auto px-4">
+---
+import X from "./social-icons/X.astro"; 
+import GitHub from "./social-icons/GitHub.astro"; 
+import Mastodon from "./social-icons/Mastodon.astro"; 
+---
+
+<footer class="pt-8 pb-16 text-sm">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-4 flex space-x-3">
+      <a aria-label="X" target="_blank" rel="noreferrer noopener" class="text-neutral-400 hover:text-white" href="https://twitter.com/lukadev_0">
+        <X />
+      </a>
+      <a aria-label="GitHub" target="_blank" rel="noreferrer noopener" class="text-neutral-400 hover:text-white" href="https://github.com/lukadev-0">
+        <GitHub />
+      </a>
+      <a aria-label="Mastodon" target="_blank" rel="noreferrer noopener" class="text-neutral-400 hover:text-white" href="https://fosstodon.org/@lukadev">
+        <Mastodon />
+      </a>
+    </div>
+
+    <p class="text-neutral-400 mb-1">
+      Copyright {new Date().getFullYear()} LukaDev, licensed under the Apache License 2.0.
+    </p>
+
     <p class="text-neutral-400">
-      built with <a class="text-white font-medium" href="https://astro.build/">Astro</a>,
-      hosted on <a class="text-white font-medium" href="https://pages.github.com/"
-        >GitHub Pages</a
-      >.
+      Website built with <a href="https://astro.build/" target="_blank" rel="noreferrer noopener" class="text-white font-medium underline underline-offset-4">
+        Astro</a>,
+      powered by <a href="https://docs.github.com/en/pages" target="_blank" rel="noreferrer noopener" class="text-white font-medium underline underline-offset-4">
+        GitHub Pages</a>.
     </p>
   </div>
 </footer>
