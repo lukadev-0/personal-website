@@ -38,11 +38,10 @@ import FullLogo from "./FullLogo.astro";
     const mainNavButton = document.getElementById("main-nav-button") as HTMLButtonElement;
     const mainNav = document.getElementById("main-nav") as HTMLDivElement;
     const mainNavOverlay = document.getElementById("main-nav-overlay") as HTMLDivElement;
-    const mainNavClose = document.getElementById("main-nav-close") as HTMLDivElement;
 
     let navOpen = false;
 
-    function setNavOpen(open) {
+    function setNavOpen(open: boolean) {
       navOpen = open;
       mainNav.dataset.open = String(navOpen);
       mainNavButton.setAttribute("aria-expanded", String(navOpen));
@@ -63,7 +62,7 @@ import FullLogo from "./FullLogo.astro";
   </script>
 </header>
 
-<nav transition:persist id="main-nav" class="data-[open=false]:pointer-events-none group fixed inset-0 z-50" data-open="false">
+<nav transition:persist id="main-nav" class="data-[open=false]:pointer-events-none data-[open=false]:invisible group fixed inset-0 z-50" data-open="false">
   <div id="main-nav-overlay" class="fixed inset-0 bg-neutral-900/50 backdrop-blur-lg opacity-100 group-data-[open=false]:opacity-0 transition-opacity duration-500"></div>
   <div class="group-data-[open=false]:-translate-x-full max-w-sm w-full h-screen fixed bg-black transition-transform duration-500">
     <div class="h-16 flex items-center mb-2 px-6">
