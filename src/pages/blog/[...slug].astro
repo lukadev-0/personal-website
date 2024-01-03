@@ -54,7 +54,14 @@ const { Content } = await post.render();
             class="text-neutral-400 font-medium"
             datetime={post.data.date.toISOString()}
           >
-            {post.data.date.toDateString()}
+            {
+              post.data.date.toLocaleDateString("en-US", {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })
+            }
           </time>
         </div>
 
