@@ -1,0 +1,94 @@
+---
+title: Goodbye 2023
+description: It's the end of 2023, here's a look back at the past year.
+date: 2024-01-03
+---
+
+import { Image } from "astro:assets";
+
+It's the end of 2023, and we got a whole new year in front of us.
+
+2023 has been a good run, it's probably the year I've been the most active with development in my
+life.
+
+Here's a look back at the past year in no particular order.
+
+## GitHub Activity
+
+First, let's compare my GitHub activity from 2022 to 2023, because that's the only
+thing that matters as a developer.
+
+import contributions2023 from "../../assets/blog/goodbye-2023/contributions-2023.png";
+import contributions2022 from "../../assets/blog/goodbye-2023/contributions-2022.png";
+
+<Image src={contributions2023} alt="my GitHub contribution chart of 2023, 521 contributions in total." />
+<Image src={contributions2022} alt="my GitHub contribution chart of 2022, 218 contributions in total." />
+
+As you can see, I've contributed more than twice as much compared to 2022. Which is pretty cool.
+Though my shower still uses GitHub more than me.
+
+import shower from "../../assets/blog/goodbye-2023/shower.jpg";
+
+<Image src={shower} alt="a shower with green tiles, which looks like a GitHub contribution chart." />
+
+## Bird
+
+I made a little Twitter/X clone named [Bird](https://bird.lukadev.me/). I've made multiple iterations
+of it throughout the year, let me share you the technologies and libraries I used for the current
+iteration.
+
+I used [Next.js](https://nextjs.org/) for the framework, using the new server components stuff.
+
+For the UI I used
+[shadcn/ui](https://ui.shadcn.com), which is amazing, I love how instead of
+just being a package you install from NPM. You actually copy/paste their
+code or use their CLI into your codebase, which means you own the code and
+can modify it to your liking.
+
+For authentication I used [Clerk](https://clerk.com/), Clerk was really simple to setup and use.
+And I didn't have to manage database stuff, OAuth, tokens, etc. It's all handled by Clerk.
+
+To store data, I used [DrizzleORM](https://orm.drizzle.team/) which provides a really nice developer
+experience, it's quite new but its still really good. It's type-safe, and doesn't require a codegen
+step unlike Prisma. For the actual database I used [Turso](https://turso.tech/), which is a SQLite,
+edge focused, database provider.
+
+I also used [Bun](https://bun.sh/) for the runtime, it's really fast compared to Node.js, and
+I like how it provides a runtime, package manager, bundler, and test runner all in one. Though Bun
+still has some rough edges it's still really good.
+
+## Advent of Code
+
+This is the first year I participated in Advent of Code. I used Rust for all the solutions, and its
+pretty fun, but I did quit on day 5 because I was too lazy to do it.
+
+The difficulty was also higher this year compared to the past, according to some people on Reddit.
+
+## Switch to Neovim
+
+This year was also the year I switched to Neovim, I've heard its pretty good, especially from people
+like [ThePrimeagen](https://www.youtube.com/@ThePrimeagen) and I've got to say, it's pretty good.
+
+It was a little hard at the beginning, with all the new motions and keybinds and stuff, but once you
+start getting the hang of it, you get a lot faster and more productive.
+
+## I use Arch btw
+
+This was also the year I switched to Linux. First, I decided to dual boot Windows and Pop!_OS. Which
+was pretty nice. But I decided I wanted to go deeper, and deeper I did go.
+
+I installed Arch, a lightweight, general purpose, rolling-release Linux distribution.
+
+When you boot into Arch you just get thrown into a terminal, no windows, no GUI, no nothing. It took a
+few days to get everything setup, but it was worth it. I'm now super productive as I've switched to a
+tiling window manager ([Hyprland](https://hyprland.org/)), and it's fantastic.
+
+I simply love how you can customize everything to your liking, and it uses way less resources compared to
+Windows, the difference in performance was huge, especially due to the fact that my computer isn't the most
+powerful out there.
+
+## The next chapter
+
+It's been a good run, but now it's time for 2024. I look forward to what the new year has to offer.
+
+Goodbye!
