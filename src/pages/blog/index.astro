@@ -20,13 +20,13 @@ const allBlogPosts = (await getCollection("blog")).sort(
   <Layout>
     <div class="text-center mt-24 mb-16">
       <h1 class="text-5xl font-bold mb-4">blog</h1>
-      <p class="text-neutral-400 sm:text-lg mb-6">
+      <p class="text-neutral-400 sm:text-lg mb-5">
         my thoughts on software development.
       </p>
       <div>
         <a
           href="/rss.xml"
-          class="inline-flex items-center text-sm font-semibold px-3 py-2.5 border border-neutral-800 hover:bg-neutral-950 transition rounded-md"
+          class="inline-flex items-center text-sm font-semibold px-3 py-2 hover:bg-neutral-950 transition rounded-md"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ const allBlogPosts = (await getCollection("blog")).sort(
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="w-4 h-4 mr-2"
+            class="w-4 h-4 mr-1"
             ><path d="M4 11a9 9 0 0 1 9 9"></path><path
               d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"
             ></circle></svg
