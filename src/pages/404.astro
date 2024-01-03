@@ -1,22 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import RootLayout from "../layouts/RootLayout.astro";
 ---
 
-<Layout
+<RootLayout
   title="Not Found - LukaDev"
   description="This page does not exist"
-  mainContainerClass="flex-grow flex items-center"
 >
-  <div class="w-full">
-    <h1 class="mb-4">
-      <span class="text-xl tracking-wide font-bold text-blue-400 block">
-        404
-      </span>
-      <span class="text-3xl sm:text-5xl font-medium block">Page Not Found</span>
-    </h1>
+  <Layout class="flex-grow flex items-center">
+    <div class="w-full">
+      <h1 class="mb-4">
+        <span class="text-xl tracking-wide font-bold text-blue-400 block">
+          404
+        </span>
+        <span class="text-3xl sm:text-5xl font-medium block">Page Not Found</span>
+      </h1>
 
-    <p class="max-w-xs text-xl text-neutral-400">
-      The page you were looking for does not exist.
-    </p>
-  </div>
-</Layout>
+      <p class="max-w-xs text-xl text-neutral-400">
+        The page you were looking for does not exist.
+      </p>
+    </div>
+  </Layout>
+</RootLayout>

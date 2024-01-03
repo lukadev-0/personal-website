@@ -1,13 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import RootLayout from "../../layouts/RootLayout.astro";
 
 const allBlogPosts = (await getCollection("blog")).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 ---
 
-<Layout
+<RootLayout
   title="blog - lukadev"
   description="my thoughts on software development."
   social={{
@@ -16,69 +17,71 @@ const allBlogPosts = (await getCollection("blog")).sort(
     url: "https://lukadev.me/blog",
   }}
 >
-  <div class="flex items-center mt-24 mb-10">
-    <h1 class="text-5xl font-bold">blog</h1>
-    <a
-      href="/rss.xml"
-      aria-label="RSS feed"
-      class="ml-auto p-2 rounded-md bg-neutral-950/50 hover:bg-neutral-950 border border-neutral-800 transition"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="w-5 h-5"
+  <Layout>
+    <div class="flex items-center mt-24 mb-10">
+      <h1 class="text-5xl font-bold">blog</h1>
+      <a
+        href="/rss.xml"
+        aria-label="RSS feed"
+        class="ml-auto p-2 rounded-md bg-neutral-950/50 hover:bg-neutral-950 border border-neutral-800 transition"
       >
-        <path
-          d="M3.75 3a.75.75 0 00-.75.75v.5c0 .414.336.75.75.75H4c6.075 0 11 4.925 11 11v.25c0 .414.336.75.75.75h.5a.75.75 0 00.75-.75V16C17 8.82 11.18 3 4 3h-.25z"
-        ></path>
-        <path
-          d="M3 8.75A.75.75 0 013.75 8H4a8 8 0 018 8v.25a.75.75 0 01-.75.75h-.5a.75.75 0 01-.75-.75V16a6 6 0 00-6-6h-.25A.75.75 0 013 9.25v-.5zM7 15a2 2 0 11-4 0 2 2 0 014 0z"
-        ></path>
-      </svg>
-    </a>
-  </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            d="M3.75 3a.75.75 0 00-.75.75v.5c0 .414.336.75.75.75H4c6.075 0 11 4.925 11 11v.25c0 .414.336.75.75.75h.5a.75.75 0 00.75-.75V16C17 8.82 11.18 3 4 3h-.25z"
+          ></path>
+          <path
+            d="M3 8.75A.75.75 0 013.75 8H4a8 8 0 018 8v.25a.75.75 0 01-.75.75h-.5a.75.75 0 01-.75-.75V16a6 6 0 00-6-6h-.25A.75.75 0 013 9.25v-.5zM7 15a2 2 0 11-4 0 2 2 0 014 0z"
+          ></path>
+        </svg>
+      </a>
+    </div>
 
-  <div class="blog-cards group">
-    {
-      allBlogPosts.map((post) => (
-        <article class="blog-card relative my-5 group group/card block h-full p-px rounded-md hover:bg-[#101012] overflow-hidden transition duration-500 outline-none focus-within:bg-neutral-700 before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(circle_200px_at_var(--cursor-x)_var(--cursor-y),white_0,transparent_50%)] before:opacity-0 group-hover:before:opacity-10 hover:before:!opacity-50 before:transition-opacity before:duration-1000">
-          <div class="p-5 bg-black overflow-hidden relative rounded-[0.3125rem] group-focus-within/card:bg-[#040404] transition duration-500">
-            <h2 class="text-lg font-semibold text-neutral-200">
-              <a
-                href={`/blog/${post.slug}`}
-                class="outline-none after:content-[''] after:absolute after:inset-0"
-              >
-                {post.data.title}
-              </a>
-            </h2>
-            <p class="text-neutral-400 mb-1">{post.data.description}</p>
+    <div class="blog-cards group">
+      {
+        allBlogPosts.map((post) => (
+          <article class="blog-card relative my-5 group group/card block h-full p-px rounded-md hover:bg-[#101012] overflow-hidden transition duration-500 outline-none focus-within:bg-neutral-700 before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(circle_200px_at_var(--cursor-x)_var(--cursor-y),white_0,transparent_50%)] before:opacity-0 group-hover:before:opacity-10 hover:before:!opacity-50 before:transition-opacity before:duration-1000">
+            <div class="p-5 bg-black overflow-hidden relative rounded-[0.3125rem] group-focus-within/card:bg-[#040404] transition duration-500">
+              <h2 class="text-lg font-semibold text-neutral-200">
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="outline-none after:content-[''] after:absolute after:inset-0"
+                >
+                  {post.data.title}
+                </a>
+              </h2>
+              <p class="text-neutral-400 mb-1">{post.data.description}</p>
 
-            <div>
-              <time
-                class="text-sm text-neutral-400 font-medium"
-                datetime={post.data.date.toISOString()}
-              >
-                {post.data.date.toDateString()}
-              </time>
+              <div>
+                <time
+                  class="text-sm text-neutral-400 font-medium"
+                  datetime={post.data.date.toISOString()}
+                >
+                  {post.data.date.toDateString()}
+                </time>
+              </div>
             </div>
-          </div>
-        </article>
-      ))
-    }
-  </div>
+          </article>
+        ))
+      }
+    </div>
 
-  <script>
-    document.addEventListener('astro:page-load', () => {
-      const cards: NodeListOf<HTMLDivElement> = document.querySelectorAll(".blog-card");
+    <script>
+      document.addEventListener('astro:page-load', () => {
+        const cards: NodeListOf<HTMLDivElement> = document.querySelectorAll(".blog-card");
 
-      (document.querySelector(".blog-cards") as HTMLDivElement)?.addEventListener("mousemove", (event: MouseEvent) => {
-        for (const card of cards) {
-          const { left, top } = card.getBoundingClientRect();
-          card.style.setProperty("--cursor-x", `${event.clientX - left}px`)
-          card.style.setProperty("--cursor-y", `${event.clientY - top}px`)
-        }
-      })
-    });
-  </script>
-</Layout>
+        (document.querySelector(".blog-cards") as HTMLDivElement)?.addEventListener("mousemove", (event: MouseEvent) => {
+          for (const card of cards) {
+            const { left, top } = card.getBoundingClientRect();
+            card.style.setProperty("--cursor-x", `${event.clientX - left}px`)
+            card.style.setProperty("--cursor-y", `${event.clientY - top}px`)
+          }
+        })
+      });
+    </script>
+  </Layout>
+</RootLayoutLayout>

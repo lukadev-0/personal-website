@@ -2,7 +2,7 @@
 import FullLogo from "./FullLogo.astro";
 ---
 
-<header transition:persist class="fixed bg-black/80 backdrop-blur w-full z-10 border-b border-transparent data-[sticky=true]:border-neutral-700/25 transition-colors" id="main-header">
+<site-header transition:persist class="fixed bg-black/80 backdrop-blur w-full z-10 border-b border-transparent data-[sticky=true]:border-neutral-700/25 transition-colors">
   <div class="h-16 mx-auto max-w-screen-lg flex items-center px-6">
     <a
       href="#main-content"
@@ -21,50 +21,17 @@ import FullLogo from "./FullLogo.astro";
       <a class="font-medium text-neutral-400 hover:text-neutral-100" href="/blog">blog</a>
     </nav>
 
-    <button id="main-nav-button" class="ml-auto md:hidden p-2 -mr-2" aria-expanded="false" aria-label="menu" aria-controls="main-nav">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-    </button>
+    <site-nav-button class="ml-auto -mr-2 md:hidden">
+      <button class="p-2" aria-expanded="false" aria-label="menu" aria-controls="main-nav">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+    </site-nav-button>
   </div>
+</site-header>
 
-  <script>
-    const header = document.getElementById("main-header")!;
-
-    addEventListener("scroll", () => {
-      header.dataset.sticky = String(window.scrollY > 0);
-    })
-
-    header.dataset.sticky = String(window.scrollY > 0);
-
-    const mainNavButton = document.getElementById("main-nav-button") as HTMLButtonElement;
-    const mainNav = document.getElementById("main-nav") as HTMLDivElement;
-    const mainNavOverlay = document.getElementById("main-nav-overlay") as HTMLDivElement;
-
-    let navOpen = false;
-
-    function setNavOpen(open: boolean) {
-      navOpen = open;
-      mainNav.dataset.open = String(navOpen);
-      mainNavButton.setAttribute("aria-expanded", String(navOpen));
-      document.body.style.overflow = navOpen ? "hidden" : "";
-    }
-
-    mainNavButton.addEventListener("click", () => {
-      setNavOpen(!navOpen);
-    });
-
-    mainNavOverlay.addEventListener("click", () => {
-      setNavOpen(false);
-    });
-
-    mainNav.addEventListener("click", () => {
-      setNavOpen(false);
-    });
-  </script>
-</header>
-
-<nav transition:persist id="main-nav" class="data-[open=false]:pointer-events-none data-[open=false]:invisible group fixed inset-0 z-50" data-open="false">
-  <div id="main-nav-overlay" class="fixed inset-0 bg-neutral-900/50 backdrop-blur-lg opacity-100 group-data-[open=false]:opacity-0 transition-opacity duration-500"></div>
-  <div class="group-data-[open=false]:-translate-x-full max-w-sm w-full h-screen fixed bg-black transition-transform duration-500">
+<site-nav transition:persist id="main-nav" class="data-[open=false]:pointer-events-none group fixed inset-0 z-50" data-open="false">
+  <div class="nav-overlay fixed inset-0 bg-neutral-900/50 backdrop-blur-lg opacity-100 group-data-[open=false]:opacity-0 transition-opacity duration-500"></div>
+  <div class="group-data-[open=false]:-translate-x-full max-w-80 w-full h-screen fixed bg-black transition-transform duration-500">
     <div class="h-16 flex items-center mb-2 px-6">
       <a href="/" aria-label="LukaDev Homepage">
         <FullLogo class="h-6" />
@@ -81,4 +48,77 @@ import FullLogo from "./FullLogo.astro";
       <a class="px-6 py-2 font-medium text-neutral-400 hover:text-neutral-100" href="/blog">blog</a>
     </div>
   </div>
-</nav>
+</site-nav>
+
+<script>
+  console.log("yo")
+
+  class Header extends HTMLElement {
+    public _handleScroll?: EventListener;
+
+    connectedCallback() {
+      console.log("connect")
+
+      this._handleScroll = () => {
+        console.log("scroll")
+        this.dataset.sticky = String(window.scrollY > 0);
+      }
+      window.addEventListener("scroll", this._handleScroll);
+
+      this.dataset.sticky = String(window.scrollY > 0);
+    }
+
+    disconnectedCallback() {
+      console.log("disconnect")
+
+      if (this._handleScroll) {
+        window.removeEventListener("scroll", this._handleScroll);
+      }
+    }
+  }
+
+  class Nav extends HTMLElement {
+    private _open = false
+
+    get open() {
+      return this._open;
+    }
+
+    set open(value: boolean) {
+      this._open = value;
+      this.dataset.open = String(value);
+
+      for (const element of document.querySelectorAll("site-nav-button button")) {
+        element.setAttribute("aria-expanded", String(value));
+      }
+    }
+
+    connectedCallback() {
+      this.open = this._open;
+
+      this.querySelector(".nav-overlay")?.addEventListener("click", () => {
+        this.open = false;
+      });
+
+      for (const link of this.querySelectorAll("button, :link")) {
+        link.addEventListener("click", () => {
+          this.open = false;
+        });
+      }
+    }
+  }
+
+  class NavButton extends HTMLButtonElement {
+    connectedCallback() {
+      this.addEventListener("click", () => {
+        for (const element of document.querySelectorAll("site-nav") as NodeListOf<Nav>) {
+          element.open = !element.open;
+        }
+      });
+    }
+  }
+
+  window.customElements.define("site-header", Header, { extends: "header" })
+  window.customElements.define("site-nav", Nav, { extends: "nav" })
+  window.customElements.define("site-nav-button", NavButton, { extends: "button" })
+</script>

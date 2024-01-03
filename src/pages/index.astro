@@ -1,11 +1,12 @@
 ---
 import ProjectCard from "../components/ProjectCard.astro";
+import RootLayout from "../layouts/RootLayout.astro";
 import Layout from "../layouts/Layout.astro";
 
 export const prerender = true;
 ---
 
-<Layout
+<RootLayout
   title="lukadev"
   description="Full-stack web developer and Roblox scripter based in Belgium."
   social={{
@@ -14,62 +15,64 @@ export const prerender = true;
     url: "https://lukadev.me",
   }}
 >
-  <section class="pb-36 pt-40">
-    <div id="hero">
-      <h1 class="text-4xl sm:text-5xl font-bold mb-4 text-gray-300">
-        hi, i'm <span class="text-white font-extrabold">lukadev</span>.
-      </h1>
+  <Layout>
+    <section class="pb-36 pt-40">
+      <div id="hero">
+        <h1 class="text-4xl sm:text-5xl font-bold mb-4 text-gray-300">
+          hi, i'm <span class="text-white font-extrabold">lukadev</span>.
+        </h1>
 
-      <p class="text-neutral-400 text-lg max-w-xs sm:text-xl sm:max-w-md">
-        I enjoy web development and Roblox scripting, and I live in Belgium.
-      </p>
-    </div>
-  </section>
+        <p class="text-neutral-400 text-lg max-w-xs sm:text-xl sm:max-w-md">
+          I enjoy web development and Roblox scripting, and I live in Belgium.
+        </p>
+      </div>
+    </section>
 
-  <section class="mb-32" id="projects">
-    <h2 class="text-2xl font-bold mb-4">projects</h2>
-    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 group project-cards">
-      <li>
-        <ProjectCard
-          name="Random Quote Machine"
-          href="https://quote.lukadev.me/"
-        >
-          A website with quotes!
-        </ProjectCard>
-      </li>
+    <section class="mb-32" id="projects">
+      <h2 class="text-2xl font-bold mb-4">projects</h2>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 group project-cards">
+        <li>
+          <ProjectCard
+            name="Random Quote Machine"
+            href="https://quote.lukadev.me/"
+          >
+            A website with quotes!
+          </ProjectCard>
+        </li>
 
-      <li>
-        <ProjectCard
-          name="TaggedObject"
-          href="https://github.com/lukadev-0/tagged-object"
-        >
-          A CollectionService utility for Roblox.
-        </ProjectCard>
-      </li>
+        <li>
+          <ProjectCard
+            name="TaggedObject"
+            href="https://github.com/lukadev-0/tagged-object"
+          >
+            A CollectionService utility for Roblox.
+          </ProjectCard>
+        </li>
 
-      <li>
-        <ProjectCard name="Luau Guide" href="https://luau-guide.vercel.app/">
-          A work in progress guide to Luau
-        </ProjectCard>
-      </li>
+        <li>
+          <ProjectCard name="Luau Guide" href="https://luau-guide.vercel.app/">
+            A work in progress guide to Luau
+          </ProjectCard>
+        </li>
 
-      <li>
-        <ProjectCard name="Discokit" href="https://discokit.vercel.app/">
-          A library for the Discord API.
-        </ProjectCard>
-      </li>
+        <li>
+          <ProjectCard name="Discokit" href="https://discokit.vercel.app/">
+            A library for the Discord API.
+          </ProjectCard>
+        </li>
 
-      <li>
-        <ProjectCard name="Bird" href="https://bird.lukadev.me/">
-          A social media app similar to Twitter/X.
-        </ProjectCard>
-      </li>
+        <li>
+          <ProjectCard name="Bird" href="https://bird.lukadev.me/">
+            A social media app similar to Twitter/X.
+          </ProjectCard>
+        </li>
 
-      <li>
-        <ProjectCard name="Persist" href="https://github.com/lukadev-0/rbx-persist">
-          A data store library for Roblox.
-        </ProjectCard>
-      </li>
-    </ul>
-  </section>
-</Layout>
+        <li>
+          <ProjectCard name="Persist" href="https://github.com/lukadev-0/rbx-persist">
+            A data store library for Roblox.
+          </ProjectCard>
+        </li>
+      </ul>
+    </section>
+  </Layout>
+</RootLayout>

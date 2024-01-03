@@ -1,8 +1,13 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'svg'>
+---
 <svg
-  class="w-6 h-6"
   viewBox="0 0 128 128"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
+  {...Astro.props}
 >
   <g clip-path="url(#clip0_13_102)">
     <path

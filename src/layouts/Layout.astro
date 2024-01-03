@@ -2,87 +2,26 @@
 import "@fontsource-variable/plus-jakarta-sans";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import { ViewTransitions } from "astro:transitions";
+import type { HTMLAttributes } from "astro/types";
 
-interface Props {
-  title: string;
-  description: string;
-  mainContainerClass?: string;
-  social?: {
-    title: string;
-    type: string;
-    url: string;
-  };
-}
+type Props = HTMLAttributes<'main'>
 
-const { title, description, mainContainerClass, social } = Astro.props;
+const { class: className, ...props } = Astro.props;
 ---
 
-<html lang="en" class="[color-scheme:dark]">
-  <head>
-    <meta charset="utf-8" />
-    <link
-      id="favicon"
-      rel="icon"
-      type="image/svg+xml"
-      href="/favicon.svg"
-      transition:persist
-    />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+<div class="min-h-screen flex flex-col w-full">
+  <Header />
 
-    {
-      social && (
-        <>
-          <meta property="og:title" content={social.title} />
-          <meta property="og:site_name" content="lukadev" />
-          <meta property="og:description" content={description} />
-          <meta property="og:type" content={social.type} />
-          <meta property="og:url" content={social.url} />
-          <meta name="twitter:title" content={social.title} />
-          <meta name="twitter:description" content={description} />
-          <meta name="twitter:card" content="summary_large_image" />
-        </>
-      )
-    }
+  <main
+    id="main-content"
+    class:list={['pt-16 w-full max-w-screen-lg mx-auto px-6', className]}
+    transition:animate="fade"
+    {...props}
+  >
+    <slot />
+  </main>
+</div>
 
-    <script>
-      const favicon = document.getElementById("favicon") as HTMLLinkElement;
-
-      function updateFavicon(dark: boolean) {
-        favicon.href = dark ? "/favicon-dark.svg" : "/favicon.svg";
-      }
-
-      const media = window.matchMedia("(prefers-color-scheme: dark)");
-      updateFavicon(media.matches);
-      media.addEventListener("change", (e) => updateFavicon(e.matches));
-    </script>
-
-    <style is:global>
-      html {
-        scroll-behavior: smooth;
-      }
-    </style>
-
-    <ViewTransitions />
-  </head>
-  <body class="bg-black text-white">
-    <div class="min-h-screen flex flex-col w-full">
-      <Header />
-
-      <main
-        id="main-content"
-        class={`pt-16 w-full max-w-screen-lg mx-auto px-6${
-          mainContainerClass ? ` ${mainContainerClass}` : ""
-        }`}
-      >
-        <slot />
-      </main>
-    </div>
-
-    <Footer />
-  </body>
-</html>
+<div class="py-16 text-sm border-t border-neutral-700/25">
+  <Footer class="max-w-screen-lg mx-auto px-6" />
+</div>
