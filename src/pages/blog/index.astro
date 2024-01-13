@@ -18,15 +18,15 @@ const allBlogPosts = (await getCollection("blog")).sort(
   }}
 >
   <Layout>
-    <div class="text-center mt-24 mb-16">
+    <div class="sm:text-center mt-24 mb-16">
       <h1 class="text-5xl font-bold mb-4">blog</h1>
-      <p class="text-neutral-400 sm:text-lg mb-5">
+      <p class="text-neutral-400 text-lg mb-5">
         my thoughts on software development.
       </p>
       <div>
         <a
           href="/rss.xml"
-          class="inline-flex items-center text-sm font-semibold px-3 py-2 hover:bg-neutral-950 transition rounded-md"
+          class="inline-flex items-center text-sm font-semibold px-3 py-2 bg-neutral-950 hover:bg-neutral-900 transition rounded-md"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
