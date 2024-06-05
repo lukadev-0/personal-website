@@ -1,30 +1,36 @@
 {
-  "name": "lukadev-personal-website",
+  "name": "",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
-  "trustedDependencies": [
-    "sharp"
-  ],
   "dependencies": {
-    "@astrojs/mdx": "1.0.3",
-    "@astrojs/rss": "3.0.0",
-    "@astrojs/sitemap": "3.0.0",
-    "@astrojs/tailwind": "5.0.0",
-    "@fontsource-variable/plus-jakarta-sans": "^5.0.13",
-    "astro": "4.0.9",
-    "sharp": "^0.33.0",
-    "tailwindcss": "^3.3.3"
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/mdx": "^3.0.1",
+    "@astrojs/react": "^3.4.0",
+    "@astrojs/rss": "^4.0.6",
+    "@astrojs/sitemap": "^3.1.5",
+    "@astrojs/tailwind": "^5.1.0",
+    "@fontsource-variable/plus-jakarta-sans": "^5.0.21",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@tailwindcss/typography": "^0.5.13",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "astro": "^4.9.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "simple-icons": "^12.1.0",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.9",
-    "prettier": "^3.1.1",
-    "prettier-plugin-astro": "^0.12.3"
+    "prettier": "^3.3.0",
+    "prettier-plugin-astro": "^0.14.0",
+    "prettier-plugin-tailwindcss": "^0.6.1"
   }
 }

@@ -1,24 +1,45 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import RootLayout from "../layouts/RootLayout.astro";
+import { NotFoundTypewriter } from "../components/NotFoundTypewriter";
 ---
 
-<RootLayout
-  title="Not Found - LukaDev"
-  description="This page does not exist"
+<Layout
+  title="page not found - lukadev"
+  description="This page was not found!"
+  class="-mt-8 flex flex-col justify-center py-16 lg:-mx-16 lg:flex-row lg:items-center lg:justify-between"
 >
-  <Layout class="flex-grow flex items-center">
-    <div class="w-full">
-      <h1 class="mb-4">
-        <span class="text-xl tracking-wide font-bold text-blue-400 block">
-          404
-        </span>
-        <span class="text-3xl sm:text-5xl font-medium block">Page Not Found</span>
-      </h1>
+  <div>
+    <h1 class="mb-2 text-2xl font-bold">page not found</h1>
+    <p class="mb-4 text-zinc-400">the page you are looking for doesn't exist</p>
+    <p>
+      <a
+        href="/"
+        class="font-medium text-light underline decoration-zinc-400 underline-offset-4 hover:decoration-light"
+      >
+        home
+      </a>
+    </p>
+  </div>
+  <div
+    aria-hidden="true"
+    class="-mx-6 mt-16 w-screen overflow-auto border-b border-t border-zinc-800 bg-black p-6 text-sm text-zinc-200 sm:mx-0 sm:w-full sm:max-w-md sm:rounded-lg sm:border lg:mt-0"
+  >
+    <style is:global>
+      .cursor-blink {
+        animation: cursor-blink 2s linear infinite;
+      }
 
-      <p class="max-w-xs text-xl text-neutral-400">
-        The page you were looking for does not exist.
-      </p>
-    </div>
-  </Layout>
-</RootLayout>
+      @keyframes cursor-blink {
+        0%,
+        48% {
+          opacity: 1;
+        }
+        54%,
+        96% {
+          opacity: 0;
+        }
+      }
+    </style>
+    <pre class="min-h-[7lh]"><NotFoundTypewriter client:idle /></pre>
+  </div>
+</Layout>

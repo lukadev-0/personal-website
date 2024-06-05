@@ -6,7 +6,7 @@ export async function GET() {
 
   return rss({
     title: "lukadev's blog",
-    description: "my thoughts on software development.",
+    description: "my thoughts on software development",
     site: "https://lukadev.me/",
     items: posts.map((post) => ({
       title: post.data.title,

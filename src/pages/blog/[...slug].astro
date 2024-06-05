@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import RootLayout from "../../layouts/RootLayout.astro";
-import Footer from "../../components/Footer.astro";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const allBlogPosts = await getCollection("blog");
@@ -15,7 +14,7 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<RootLayout
+<Layout
   title={`${post.data.title} - lukadev`}
   description={post.data.description}
   social={{
@@ -24,7 +23,10 @@ const { Content } = await post.render();
     url: `https://lukadev.me/blog/${post.slug}`,
   }}
 >
-  <div class="px-6 mx-auto prose prose-invert py-16" transition:animate="fade">
+  <div
+    class="prose prose-invert mx-auto max-w-screen-md py-16"
+    transition:animate="fade"
+  >
     <div class="not-prose">
       <a
         class="inline-flex items-center font-medium hover:text-white"
@@ -38,7 +40,7 @@ const { Content } = await post.render();
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="w-5 h-5 mr-1"
+          class="mr-1 h-5 w-5"
         >
           <path d="m12 19-7-7 7-7"></path>
           <path d="M19 12H5"></path>
@@ -48,10 +50,14 @@ const { Content } = await post.render();
     </div>
 
     <article class="py-6">
-      <header>
-        <div class="mb-2">
+      <header class="not-prose">
+        <h1 class="mb-2 text-3xl font-extrabold text-light lg:text-4xl">
+          {post.data.title}
+        </h1>
+
+        <div class="mb-6">
           <time
-            class="text-neutral-400 font-medium"
+            class="font-medium text-neutral-400"
             datetime={post.data.date.toISOString()}
           >
             {
@@ -64,42 +70,9 @@ const { Content } = await post.render();
             }
           </time>
         </div>
-
-        <h1 class="mb-6">{post.data.title}</h1>
-
-        <div class="mb-8 not-prose">
-          <a
-            class="inline-flex items-center text-white"
-            href="https://twitter.com/lukadev_0"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg
-              class="w-12 h-12 rounded-full ring-1 ring-neutral-900"
-              viewBox="0 0 256 256"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="256" height="256" fill="black"></rect>
-              <path
-                d="M114.667 64H136C144.405 64 152.727 65.6554 160.492 68.8717C168.257 72.088 175.312 76.8022 181.255 82.7452C187.198 88.6881 191.912 95.7434 195.128 103.508C198.345 111.273 200 119.595 200 128C200 136.405 198.345 144.727 195.128 152.492C191.912 160.257 187.198 167.312 181.255 173.255C175.312 179.198 168.257 183.912 160.492 187.128C152.727 190.345 144.405 192 136 192H72V64L96.8889 88.8889V163.556H136C140.669 163.556 145.293 162.636 149.607 160.849C153.92 159.062 157.84 156.443 161.142 153.142C164.443 149.84 167.062 145.92 168.849 141.607C170.636 137.293 171.556 132.669 171.556 128C171.556 123.331 170.636 118.707 168.849 114.393C167.062 110.08 164.443 106.16 161.142 102.858C157.84 99.5568 153.92 96.9378 149.607 95.1509C145.293 93.3641 140.669 92.4444 136 92.4444L136 142.222L114.667 122.667V64Z"
-                fill="white"></path>
-            </svg>
-            <div class="ml-2">
-              <div class="-mt-1 font-semibold">LukaDev</div>
-              <div class="text-xs -mt-1 font-medium text-neutral-400">
-                @lukadev_0
-              </div>
-            </div>
-          </a>
-        </div>
       </header>
 
       <Content />
     </article>
-
-    <div class="pt-8 text-sm border-t border-t-neutral-700/25 not-prose">
-      <Footer class="py-6" />
-    </div>
   </div>
-</RootLayout>
+</Layout>

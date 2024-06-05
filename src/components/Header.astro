@@ -1,208 +1,99 @@
 ---
 import FullLogo from "./FullLogo.astro";
+import { Menu } from "./Menu";
 ---
 
-<site-header transition:persist class="group">
-  <header
-    class="fixed bg-black/80 backdrop-blur w-full z-10 border-b border-transparent group-data-[sticky=true]:border-neutral-700/25 transition-colors"
+<header class="relative z-10 flex h-16 items-center">
+  <a
+    href="#main-content"
+    class="sr-only rounded bg-zinc-900 text-sm font-medium outline-none ring-light/50 focus:not-sr-only focus:fixed focus:px-2 focus:py-1.5 focus:ring-2"
   >
-    <div class="h-16 mx-auto max-w-screen-lg flex items-center px-6">
+    Jump to main content
+  </a>
+  <a href="/" aria-label="LukaDev">
+    <FullLogo class="h-5" aria-hidden="true" />
+  </a>
+  <nav class="ml-auto">
+    <div class="hidden space-x-4 sm:flex">
+      <a class="font-medium text-zinc-400 hover:text-zinc-200" href="/">
+        home
+      </a>
       <a
-        href="#main-content"
-        class="sr-only focus:not-sr-only focus:absolute bg-white text-black focus:px-2 focus:py-1 font-semibold inline-block z-50"
+        class="font-medium text-zinc-400 hover:text-zinc-200"
+        href="/#projects"
       >
-        Skip navigation
+        projects
       </a>
-
-      <a href="/" aria-label="LukaDev Homepage">
-        <FullLogo aria-hidden="true" class="h-6" />
+      <a class="font-medium text-zinc-400 hover:text-zinc-200" href="/blog">
+        blog
       </a>
-
-      <nav class="ml-auto items-center space-x-6 hidden md:flex">
-        <a class="font-medium text-neutral-400 hover:text-neutral-100" href="/"
-          >home</a
-        >
-        <a
-          class="font-medium text-neutral-400 hover:text-neutral-100"
-          href="/#projects">projects</a
-        >
-        <a
-          class="font-medium text-neutral-400 hover:text-neutral-100"
-          href="/blog">blog</a
-        >
-      </nav>
-
-      <site-nav-button class="ml-auto -mr-2 md:hidden">
-        <button
-          class="p-2"
-          aria-expanded="false"
-          aria-label="menu"
-          aria-controls="main-nav"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-menu"
-            ><line x1="4" x2="20" y1="12" y2="12"></line><line
-              x1="4"
-              x2="20"
-              y1="6"
-              y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg
-          >
-        </button>
-      </site-nav-button>
     </div>
-  </header>
-</site-header>
+    <div class="block h-6 w-6 sm:hidden">
+      <Menu client:only="react" logo={undefined}>
+        <style is:global>
+          @keyframes menu-fade-in {
+            from {
+              opacity: 0;
+            }
+          }
 
-<site-nav transition:persist data-open="false" class="group">
-  <nav
-    class="group-data-[open=false]:pointer-events-none group fixed inset-0 z-50"
-  >
-    <div
-      class="nav-overlay fixed inset-0 bg-neutral-900/50 backdrop-blur-lg opacity-100 group-data-[open=false]:opacity-0 transition-opacity duration-500"
-    >
-    </div>
-    <div
-      class="group-data-[open=false]:-translate-x-full max-w-80 w-full h-screen fixed bg-black transition-transform duration-500"
-    >
-      <div class="h-16 flex items-center mb-2 px-6">
-        <a href="/" aria-label="LukaDev Homepage">
-          <FullLogo class="h-6" />
-        </a>
+          @keyframes menu-fade-out {
+            to {
+              opacity: 0;
+            }
+          }
 
-        <button
-          id="main-nav-close"
-          class="ml-auto text-neutral-400 hover:text-white"
-          aria-label="close"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-x"
-            ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+          .menu-overlay[data-state="open"] {
+            animation: menu-fade-in 300ms ease-out;
+          }
+
+          .menu-overlay[data-state="closed"] {
+            animation: menu-fade-out 300ms ease-out;
+          }
+
+          @keyframes menu-slide-in {
+            from {
+              transform: translateX(-100%);
+            }
+          }
+
+          @keyframes menu-slide-out {
+            to {
+              transform: translateX(-100%);
+            }
+          }
+
+          .menu-content[data-state="open"] {
+            animation: menu-slide-in 300ms ease-out;
+          }
+
+          .menu-content[data-state="closed"] {
+            animation: menu-slide-out 300ms ease-out;
+          }
+        </style>
+
+        <FullLogo slot="logo" class="h-5" />
+        <nav class="flex flex-col px-2">
+          <a
+            class="flex h-10 items-center rounded px-4 font-medium text-zinc-400 hover:bg-zinc-900/40 hover:text-light"
+            href="/"
           >
-        </button>
-      </div>
-
-      <div class="flex flex-col">
-        <a
-          class="px-6 py-2 font-medium text-neutral-400 hover:text-neutral-100"
-          href="/">home</a
-        >
-        <a
-          class="px-6 py-2 font-medium text-neutral-400 hover:text-neutral-100"
-          href="/#projects">projects</a
-        >
-        <a
-          class="px-6 py-2 font-medium text-neutral-400 hover:text-neutral-100"
-          href="/blog">blog</a
-        >
-      </div>
+            home
+          </a>
+          <a
+            class="flex h-10 items-center rounded px-4 font-medium text-zinc-400 hover:bg-zinc-900/40 hover:text-light"
+            href="/#projects"
+          >
+            projects
+          </a>
+          <a
+            class="flex h-10 items-center rounded px-4 font-medium text-zinc-400 hover:bg-zinc-900/40 hover:text-light"
+            href="/blog"
+          >
+            blog
+          </a>
+        </nav>
+      </Menu>
     </div>
   </nav>
-</site-nav>
-
-<script>
-  console.log("yo");
-
-  class Header extends HTMLElement {
-    public _handleScroll?: EventListener;
-
-    connectedCallback() {
-      console.log("connect");
-
-      this._handleScroll = () => {
-        console.log("scroll");
-        this.dataset.sticky = String(window.scrollY > 0);
-      };
-      window.addEventListener("scroll", this._handleScroll);
-
-      this.dataset.sticky = String(window.scrollY > 0);
-    }
-
-    disconnectedCallback() {
-      console.log("disconnect");
-
-      if (this._handleScroll) {
-        window.removeEventListener("scroll", this._handleScroll);
-      }
-    }
-  }
-
-  class Nav extends HTMLElement {
-    private _open = false;
-
-    get open() {
-      return this._open;
-    }
-
-    set open(value: boolean) {
-      this._open = value;
-      this.dataset.open = String(value);
-
-      for (const element of document.querySelectorAll(
-        "site-nav-button button",
-      )) {
-        element.setAttribute("aria-expanded", String(value));
-      }
-    }
-
-    connectedCallback() {
-      this.open = this._open;
-
-      this.querySelector(".nav-overlay")?.addEventListener("click", () => {
-        this.open = false;
-      });
-
-      for (const link of this.querySelectorAll("button, :link")) {
-        link.addEventListener("click", () => {
-          this.open = false;
-        });
-      }
-    }
-  }
-
-  class NavButton extends HTMLElement {
-    public _handleClick?: EventListener;
-
-    connectedCallback() {
-      console.log("button connect");
-
-      this._handleClick = () => {
-        console.log("click");
-        for (const element of document.querySelectorAll(
-          "site-nav",
-        ) as NodeListOf<Nav>) {
-          element.open = !element.open;
-        }
-      };
-
-      this.addEventListener("click", this._handleClick);
-    }
-
-    disconnectedCallback() {
-      if (this._handleClick) {
-        this.removeEventListener("click", this._handleClick);
-      }
-    }
-  }
-
-  window.customElements.define("site-header", Header);
-  window.customElements.define("site-nav", Nav);
-  window.customElements.define("site-nav-button", NavButton);
-</script>
+</header>

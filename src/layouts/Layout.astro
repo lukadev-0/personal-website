@@ -1,27 +1,102 @@
 ---
-import "@fontsource-variable/plus-jakarta-sans";
+import plusJakartaSansWoff2 from "@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2";
+
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<'main'>
+export interface Props {
+  title: string;
+  description: string;
+  mainContainerClass?: string;
+  class?: string;
+  social?: {
+    title: string;
+    type: string;
+    url: string;
+  };
+}
 
-const { class: className, ...props } = Astro.props;
+const { title, description, social, class: className } = Astro.props;
 ---
 
-<div class="min-h-screen flex flex-col w-full">
-  <Header />
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link id="favicon" rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={plusJakartaSansWoff2}
+      crossorigin
+    />
 
-  <main
-    id="main-content"
-    class:list={['pt-16 w-full max-w-screen-lg mx-auto px-6', className]}
-    transition:animate="fade"
-    {...props}
-  >
-    <slot />
-  </main>
-</div>
+    {
+      social && (
+        <>
+          <meta property="og:title" content={social.title} />
+          <meta property="og:site_name" content="lukadev" />
+          <meta property="og:description" content={description} />
+          <meta property="og:type" content={social.type} />
+          <meta property="og:url" content={social.url} />
+          <meta name="twitter:title" content={social.title} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:card" content="summary_large_image" />
+        </>
+      )
+    }
 
-<div class="py-16 text-sm border-t border-neutral-700/25">
-  <Footer class="max-w-screen-lg mx-auto px-6" />
-</div>
+    <style is:global>
+      html {
+        scroll-behavior: smooth;
+        color-scheme: dark;
+      }
+
+      body {
+        background: theme(colors.dark);
+        color: theme(colors.light);
+      }
+
+      /* plus-jakarta-sans-latin-wght-normal */
+      @font-face {
+        font-family: "Plus Jakarta Sans Variable";
+        font-style: normal;
+        font-display: block;
+        font-weight: 200 800;
+        src: url(@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2)
+          format("woff2-variations");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+          U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    </style>
+
+    <script>
+      const favicon = document.getElementById("favicon") as HTMLLinkElement;
+
+      function updateFavicon(dark: boolean) {
+        favicon.href = dark ? "/favicon-dark.svg" : "/favicon.svg";
+      }
+
+      const media = window.matchMedia("(prefers-color-scheme: dark)");
+      updateFavicon(media.matches);
+      media.addEventListener("change", (e) => updateFavicon(e.matches));
+    </script>
+  </head>
+  <body>
+    <div class="mx-auto max-w-screen-md px-6">
+      <div class="flex min-h-screen flex-col">
+        <Header />
+        <main class:list={["flex-grow", className]} id="main-content">
+          <slot />
+        </main>
+      </div>
+      <Footer />
+    </div>
+  </body>
+</html>

@@ -1,81 +1,115 @@
 ---
-import ProjectCard from "../components/ProjectCard.astro";
-import RootLayout from "../layouts/RootLayout.astro";
 import Layout from "../layouts/Layout.astro";
+import { siGithub } from "simple-icons";
 
-export const prerender = true;
+import { projects, technologies } from "../projects";
 ---
 
-<RootLayout
+<Layout
   title="lukadev"
-  description="I enjoy web development and Roblox scripting, and I live in Belgium."
+  description="i build things on the web and Roblox"
   social={{
-    title: "hi, i'm lukadev",
+    title: "hi, i'm luka",
     type: "website",
-    url: "https://lukadev.me",
+    url: "https://lukadev.me/",
   }}
 >
-  <Layout>
-    <section class="pb-36 pt-40">
-      <div id="hero">
-        <h1 class="text-4xl sm:text-5xl font-bold mb-4 text-gray-300">
-          hi, i'm <span class="text-white font-extrabold">lukadev</span>.
-        </h1>
+  <section class="py-32">
+    <h1 class="mb-2 text-4xl font-bold text-zinc-300">
+      hi, i'm <span class="text-light">luka</span>.
+    </h1>
+    <p class="text-lg text-zinc-400">i build things on the web and Roblox</p>
+  </section>
+  <section id="projects" class="pb-16">
+    <h2 class="mb-4 text-2xl font-bold">projects</h2>
+    <div class="space-y-2">
+      {
+        projects.map((project) => (
+          <article class="group relative -mx-4 rounded-lg p-4 transition hover:bg-zinc-900/40">
+            <h3 class="font-semibold">
+              <a
+                href={project.url}
+                class="group inline-flex after:absolute after:inset-0 after:content-[''] hover:decoration-light"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {project.name}
+              </a>
+            </h3>
+            <p class="mb-3 text-zinc-400">{project.description}</p>
 
-        <p class="text-neutral-400 text-lg max-w-xs sm:text-xl sm:max-w-md">
-          I enjoy web development and Roblox scripting, and I live in Belgium.
-        </p>
-      </div>
-    </section>
+            <div class="flex items-center space-x-1.5 text-sm font-bold text-zinc-300">
+              {project.github && (
+                <Fragment>
+                  <a
+                    href={`https://github.com/${project.github}`}
+                    class="relative flex h-7 items-center rounded bg-light px-2 text-dark transition hover:bg-light/70"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="mr-1 h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path fill="currentColor" d={siGithub.path} />
+                    </svg>
+                    GitHub
+                  </a>
+                  <div class="h-4 w-px shrink-0 bg-zinc-800" />
+                </Fragment>
+              )}
 
-    <section class="mb-32" id="projects">
-      <h2 class="text-2xl font-bold mb-4">projects</h2>
-      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 group project-cards">
-        <li>
-          <ProjectCard
-            name="Random Quote Machine"
-            href="https://quote.lukadev.me/"
-          >
-            A website with quotes!
-          </ProjectCard>
-        </li>
+              <ul
+                class="relative flex space-x-1.5 overflow-auto"
+                aria-label="technologies"
+              >
+                {project.technologies.map((technologyId) => {
+                  const technology = technologies[technologyId];
+                  return (
+                    <li class="flex h-7 items-center rounded bg-zinc-900/50 px-2">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        class="mr-1 h-4 w-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                      >
+                        <path fill="currentColor" d={technology.icon} />
+                      </svg>
+                      {technology.name}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
 
-        <li>
-          <ProjectCard
-            name="TaggedObject"
-            href="https://github.com/lukadev-0/tagged-object"
-          >
-            A CollectionService utility for Roblox.
-          </ProjectCard>
-        </li>
-
-        <li>
-          <ProjectCard name="Luau Guide" href="https://luau-guide.vercel.app/">
-            A work in progress guide to Luau
-          </ProjectCard>
-        </li>
-
-        <li>
-          <ProjectCard name="Discokit" href="https://discokit.vercel.app/">
-            A library for the Discord API.
-          </ProjectCard>
-        </li>
-
-        <li>
-          <ProjectCard name="Bird" href="https://bird.lukadev.me/">
-            A social media app similar to Twitter/X.
-          </ProjectCard>
-        </li>
-
-        <li>
-          <ProjectCard
-            name="Persist"
-            href="https://github.com/lukadev-0/rbx-persist"
-          >
-            A data store library for Roblox.
-          </ProjectCard>
-        </li>
-      </ul>
-    </section>
-  </Layout>
-</RootLayout>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class:list={[
+                "absolute right-4 top-1/2 hidden h-5 w-5 sm:block",
+                "-translate-x-4 -translate-y-1/2 opacity-0 transition ease-out",
+                "group-hover:translate-x-0 group-hover:opacity-100",
+              ]}
+            >
+              <>
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </>
+            </svg>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
