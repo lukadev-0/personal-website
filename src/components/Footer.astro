@@ -2,10 +2,11 @@
 import X from "./social-icons/X.astro";
 import GitHub from "./social-icons/GitHub.astro";
 import Mastodon from "./social-icons/Mastodon.astro";
+import BMC from "./social-icons/BMC.astro";
 ---
 
-<footer class="border-t border-t-zinc-800 py-12 text-sm">
-  <div class="mb-6 flex space-x-3">
+<footer class="border-t border-t-zinc-800 pb-16 pt-10 text-sm">
+  <div class="mb-6 flex w-full items-center space-x-3">
     <a
       aria-label="X"
       target="_blank"
@@ -32,6 +33,20 @@ import Mastodon from "./social-icons/Mastodon.astro";
       href="https://fosstodon.org/@lukadev"
     >
       <Mastodon />
+    </a>
+
+    <a
+      class="!ml-auto inline-flex h-9 items-center divide-x divide-zinc-800 rounded bg-zinc-900/60 transition hover:bg-zinc-900/50"
+      target="_blank"
+      rel="noreferrer noopener"
+      href="https://buymeacoffee.com/lukadev"
+    >
+      <span class="px-3 font-medium">Buy me a Coffee</span>
+      <span class="flex w-9 justify-center">
+        <span class="-ml-[0.2rem]">
+          <BMC />
+        </span>
+      </span>
     </a>
   </div>
 
