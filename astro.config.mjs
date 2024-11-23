@@ -7,5 +7,12 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://lukadev.me",
   integrations: [mdx(), tailwind(), sitemap()],
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: "github-light",
+        dark: "github-dark",
+      },
+    },
+  },
 });
-

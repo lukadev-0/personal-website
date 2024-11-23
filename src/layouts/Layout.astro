@@ -43,3 +43,21 @@ const { title, description, class: className } = Astro.props;
     <slot />
   </body>
 </html>
+
+<style is:global>
+  .astro-code,
+  .astro-code span {
+    background-color: theme(colors.light) !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .astro-code,
+    .astro-code span {
+      color: var(--shiki-dark) !important;
+      background-color: theme(colors.gray.800) !important;
+      font-style: var(--shiki-dark-font-style) !important;
+      font-weight: var(--shiki-dark-font-weight) !important;
+      text-decoration: var(--shiki-dark-text-decoration) !important;
+    }
+  }
+</style>
