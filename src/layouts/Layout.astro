@@ -22,7 +22,7 @@ const { title, description, class: className } = Astro.props;
     <meta name="description" content={description} />
     <meta property="og:site_name" content="lukadev" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={title ?? "hi, i'm luka."} />
     <meta property="og:description" content={description} />
 
     <script is:inline>
