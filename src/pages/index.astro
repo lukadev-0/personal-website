@@ -43,8 +43,14 @@ import Footer from "../components/Footer.astro";
   sections.style.opacity = "0";
   document.body.style.opacity = "1";
 
-  animate("#side-title > *", flyUp, { duration: 0.4, delay: stagger(0.15) });
-  animate("#side-description", flyUp, { duration: 0.6, delay: 0.55 });
+  const titleAnim = animate("#side-title > *", flyUp, {
+    duration: 0.4,
+    delay: stagger(0.15),
+  });
+  animate("#side-description", flyUp, {
+    duration: 0.6,
+    delay: 0.55,
+  });
   animate("#side-links > * > *", flyUp, {
     duration: 0.6,
     delay: stagger(0.1, { startDelay: 0.9 }),
@@ -64,14 +70,12 @@ import Footer from "../components/Footer.astro";
     },
   );
 
-  // the page scrolls a little if this delay is not here for some reason
-  delay(() => {
-    const sections = document.getElementById("sections")!;
-    sections.style.opacity = "1";
+  // the page scrolls a little (on Chromium) if this is not here for some reason
+  await titleAnim;
+  sections.style.opacity = "1";
 
-    animate("#sections > *, #sections section, #sections article", flyUp, {
-      duration: 0.6,
-      delay: stagger(0.05),
-    });
-  }, 0.9);
+  animate("#sections > *, #sections section, #sections article", flyUp, {
+    duration: 0.6,
+    delay: stagger(0.05),
+  });
 </script>
