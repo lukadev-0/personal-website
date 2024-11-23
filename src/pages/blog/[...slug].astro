@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import ArrowLeft from "../../components/icons/ArrowLeft.astro";
+
+export async function getStaticPaths() {
+  const allBlogPosts = await getCollection("blog");
+  return allBlogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BlogLayout title={post.data.title} description={post.data.description}>
+  <div class="text-right">
+    <a
+      class="group inline-flex items-center font-semibold text-gray-600 transition hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-100"
+      href="/blog/"
+    >
+      <ArrowLeft
+        class="mr-1 h-5 transition-transform group-hover:-translate-x-1"
+      />
+      <span class="-mt-0.5">back to blog</span>
+    </a>
+  </div>
+
+  <article class="prose mx-auto max-w-screen-md py-16 dark:prose-invert">
+    <div class="not-prose pb-2">
+      <h1 class="mb-4 text-4xl font-bold text-dark dark:text-light">
+        {post.data.title}
+      </h1>
+      <div class="font-semibold text-gray-600 dark:text-gray-400">
+        <time datetime={post.data.date.toISOString()}>
+          {
+            post.data.date.toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })
+          }
+        </time>
+      </div>
+    </div>
+    <Content />
+  </article>
+</BlogLayout>

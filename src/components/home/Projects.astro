@@ -1,0 +1,36 @@
+---
+import Section from "./Section.astro";
+import Link from "../Link.astro";
+import { getCollection } from "astro:content";
+
+const allProjects = await getCollection("projects");
+---
+
+<Section title="my projects">
+  <p class="mb-6 mt-2 font-medium text-gray-700 dark:text-gray-400">
+    stuff i made. check out
+    <Link href="https://github.com/lukadev-0">my github</Link> for more.
+  </p>
+
+  <div class="-mb-4 space-y-2">
+    {
+      allProjects.map((project) => {
+        return (
+          <article>
+            <a
+              class="-mx-4 block rounded-lg p-4 transition hover:bg-gray-200 md:-mx-5 md:p-5 dark:hover:bg-gray-700/50"
+              href={project.data.url}
+            >
+              <h3 class="mb-0.5 font-bold text-gray-800 dark:text-gray-200">
+                {project.data.name}
+              </h3>
+              <p class="text-gray-700 dark:text-gray-400">
+                {project.data.description}
+              </p>
+            </a>
+          </article>
+        );
+      })
+    }
+  </div>
+</Section>

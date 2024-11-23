@@ -1,0 +1,30 @@
+---
+import Logotype from "../Logotype.astro";
+import ArrowRight from "../icons/ArrowRight.astro";
+---
+
+<header
+  class="sticky inset-x-0 top-0 z-10 bg-light/50 backdrop-blur-lg dark:bg-dark/50"
+>
+  <div
+    class="mx-auto flex h-[--nav-height] max-w-screen-xl items-center px-8"
+    id="header-content"
+  >
+    <Logotype class="h-4 lg:h-5" aria-label="lukadev logo" />
+    <a
+      class:list={[
+        "group -mx-2 -mt-px ml-auto flex items-center p-2 font-semibold transition",
+        "-mt-px text-sm text-gray-600 hover:text-gray-800",
+        "lg:-mt-0.5 lg:text-base",
+        "dark:text-gray-400 dark:hover:text-gray-100",
+      ]}
+      href="/blog/"
+    >
+      <span class="-mt-px sm:-mt-0.5">go to blog</span>
+      <ArrowRight
+        class="ml-1 h-5 transition-transform group-hover:translate-x-1"
+        aria-hidden="true"
+      />
+    </a>
+  </div>
+</header>

@@ -1,0 +1,17 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag = "a"> = Polymorphic<{ as: Tag }>;
+
+const { as: Tag = "a", class: className, ...props } = Astro.props;
+---
+
+<Tag
+  class:list={[
+    "font-medium text-dark underline decoration-gray-300 underline-offset-4 transition hover:decoration-current dark:text-light dark:decoration-gray-400",
+    className,
+  ]}
+  {...props}
+>
+  <slot />
+</Tag>

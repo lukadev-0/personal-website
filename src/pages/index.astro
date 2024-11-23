@@ -1,1 +1,77 @@
-Hello, world!
+---
+import Layout from "../layouts/Layout.astro";
+import Side from "../components/home/Side.astro";
+import Projects from "../components/home/Projects.astro";
+import Blog from "../components/home/Blog.astro";
+import Header from "../components/home/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  class="opacity-0 [--nav-height:theme(spacing.16)] lg:[--nav-height:theme(spacing.20)]"
+  description="i build things on the web and roblox."
+>
+  <Header />
+  <main class="mx-auto flex max-w-screen-xl flex-col px-8 lg:flex-row">
+    <Side />
+    <div class="-mx-5 flex-grow pb-24 pt-4 md:mx-0" id="sections">
+      <div class="mb-16 space-y-6 md:space-y-12">
+        <Projects />
+        <Blog />
+      </div>
+      <Footer />
+    </div>
+  </main>
+</Layout>
+
+<script>
+  import { animate } from "motion/mini";
+  import { stagger, delay } from "motion";
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  const flyUp = reduceMotion
+    ? { opacity: [0, 1] }
+    : {
+        transform: ["translateY(16px)", "translateY(0px)"],
+        opacity: [0, 1],
+      };
+
+  const sections = document.getElementById("sections")!;
+  sections.style.opacity = "0";
+  document.body.style.opacity = "1";
+
+  animate("#side-title > *", flyUp, { duration: 0.4, delay: stagger(0.15) });
+  animate("#side-description", flyUp, { duration: 0.6, delay: 0.55 });
+  animate("#side-links > * > *", flyUp, {
+    duration: 0.6,
+    delay: stagger(0.1, { startDelay: 0.9 }),
+  });
+
+  animate(
+    "#header-content > *",
+    reduceMotion
+      ? { opacity: [0, 1] }
+      : {
+          transform: ["translateY(8px)", "translateY(0px)"],
+          opacity: [0, 1],
+        },
+    {
+      duration: 0.6,
+      delay: stagger(0.1, { startDelay: 0.9 }),
+    },
+  );
+
+  // the page scrolls a little if this delay is not here for some reason
+  delay(() => {
+    const sections = document.getElementById("sections")!;
+    sections.style.opacity = "1";
+
+    animate("#sections > *, #sections section, #sections article", flyUp, {
+      duration: 0.6,
+      delay: stagger(0.05),
+    });
+  }, 0.9);
+</script>

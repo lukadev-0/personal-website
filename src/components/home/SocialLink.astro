@@ -1,0 +1,22 @@
+---
+export interface Props {
+  title: string;
+  username: string;
+  href: string;
+}
+
+const { title, username, href } = Astro.props;
+---
+
+<a
+  class="-mx-3 flex items-center rounded-lg px-3 py-1.5 transition hover:bg-gray-100 dark:hover:bg-gray-800"
+  {href}
+>
+  <slot />
+  <div class="ml-3">
+    <div class="text-sm font-medium text-gray-600 dark:text-gray-300">
+      {title}
+    </div>
+    <div class="-mt-1 font-semibold">{username}</div>
+  </div>
+</a>

@@ -1,0 +1,27 @@
+---
+import Logotype from "../components/Logotype.astro";
+import Layout, { type Props as LayoutProps } from "./Layout.astro";
+import Footer from "../components/Footer.astro";
+
+export type Props = LayoutProps;
+---
+
+<Layout {...Astro.props}>
+  <header>
+    <div class="mx-auto flex h-16 max-w-screen-sm items-center px-8">
+      <a href="/">
+        <Logotype class="h-5" aria-label="lukadev" />
+      </a>
+    </div>
+  </header>
+
+  <div class="mx-auto -mt-16 max-w-screen-sm px-8">
+    <main class="min-h-screen pt-16">
+      <slot />
+    </main>
+
+    <div class="border-t border-gray-300 py-8 dark:border-gray-700">
+      <Footer />
+    </div>
+  </div>
+</Layout>

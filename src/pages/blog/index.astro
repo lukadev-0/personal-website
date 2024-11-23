@@ -1,0 +1,61 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { getCollection } from "astro:content";
+
+const allBlogPosts = await getCollection("blog");
+
+allBlogPosts.sort((a, b) => {
+  return b.data.date.getTime() - a.data.date.getTime();
+});
+---
+
+<BlogLayout title="blog" description="ramblings about software development.">
+  <div class="py-24">
+    <h1 class="mb-4 text-4xl font-bold">blog</h1>
+    <p class="mb-12 text-lg font-medium text-gray-600 dark:text-gray-400">
+      ramblings about software development.
+    </p>
+
+    <a
+      class="rounded-lg bg-gray-200 px-4 py-3 font-semibold transition hover:bg-gray-300 dark:bg-gray-700/70 dark:hover:bg-gray-700"
+      href="/rss.xml"
+    >
+      rss feed
+    </a>
+  </div>
+
+  <div class="mb-16 space-y-2">
+    {
+      allBlogPosts.map((blog) => {
+        return (
+          <article>
+            <a
+              class="-mx-4 block rounded-lg p-4 transition hover:bg-gray-100 md:-mx-5 md:p-5 dark:hover:bg-gray-800"
+              href={`/blog/${blog.slug}/`}
+            >
+              <h3 class="mb-0.5 font-bold text-gray-800 dark:text-gray-200">
+                {blog.data.title}
+              </h3>
+              <p class="mb-4 text-gray-700 dark:text-gray-400">
+                {blog.data.description}
+              </p>
+
+              <div>
+                <time
+                  class="text-sm font-semibold text-gray-600 dark:text-gray-400"
+                  datetime={blog.data.date.toISOString()}
+                >
+                  {blog.data.date.toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </time>
+              </div>
+            </a>
+          </article>
+        );
+      })
+    }
+  </div>
+</BlogLayout>

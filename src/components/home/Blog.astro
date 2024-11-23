@@ -1,0 +1,66 @@
+---
+import Section from "./Section.astro";
+import ArrowRight from "../icons/ArrowRight.astro";
+import { getCollection } from "astro:content";
+
+const allBlogPosts = await getCollection("blog");
+
+allBlogPosts.sort((a, b) => {
+  return b.data.date.getTime() - a.data.date.getTime();
+});
+allBlogPosts.splice(5);
+---
+
+<Section title="blog">
+  <p class="mb-6 mt-2 font-medium text-gray-700 dark:text-gray-400">
+    ramblings about software development.
+  </p>
+
+  <div class="mb-6 space-y-2">
+    {
+      allBlogPosts.map((blog) => {
+        return (
+          <article>
+            <a
+              class="-mx-4 block rounded-lg p-4 transition hover:bg-gray-200 md:-mx-5 md:p-5 dark:hover:bg-gray-700/50"
+              href={`/blog/${blog.slug}/`}
+            >
+              <h3 class="mb-0.5 font-bold text-gray-800 dark:text-gray-200">
+                {blog.data.title}
+              </h3>
+              <p class="mb-4 text-gray-700 dark:text-gray-400">
+                {blog.data.description}
+              </p>
+
+              <div>
+                <time
+                  class="text-sm font-semibold text-gray-600 dark:text-gray-400"
+                  datetime={blog.data.date.toISOString()}
+                >
+                  {blog.data.date.toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </time>
+              </div>
+            </a>
+          </article>
+        );
+      })
+    }
+  </div>
+
+  <p>
+    <a
+      class="group -mx-4 inline-flex items-center rounded-md px-4 py-2.5 font-semibold transition"
+      href="/blog/"
+    >
+      <span class="-mt-0.5">more blog posts</span>
+      <ArrowRight
+        class="ml-1 h-5 transition-transform group-hover:translate-x-1"
+        aria-hidden="true"
+      />
+    </a>
+  </p>
+</Section>
