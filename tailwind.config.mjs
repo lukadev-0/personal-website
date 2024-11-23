@@ -64,6 +64,7 @@ export default {
             "--tw-prose-invert-td-borders": theme("colors.gray[700]"),
             a: {
               "text-decoration-color": theme("colors.gray[500]"),
+              "text-underline-offset": "4px",
               transition: "text-decoration-color 150ms",
               "&:hover": {
                 "text-decoration-color": "currentColor",
