@@ -38,6 +38,12 @@ const canonicalUrl = new URL(meta.url ?? Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={canonicalUrl} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="lukadev's blog"
+      href={new URL("rss.xml", Astro.site)}
+    />
 
     <title>{htmlTitle}</title>
     <meta name="description" content={meta.description} />
