@@ -1,6 +1,6 @@
 ---
 import Section from "./Section.astro";
-import Link from "../Link.astro";
+import ArrowRight from "../icons/ArrowRight.astro";
 import { getCollection } from "astro:content";
 
 const allProjects = await getCollection("projects");
@@ -8,11 +8,10 @@ const allProjects = await getCollection("projects");
 
 <Section title="my projects">
   <p class="mb-6 mt-2 font-medium text-gray-700 dark:text-gray-400">
-    stuff i made. check out
-    <Link href="https://github.com/lukadev-0">my github</Link> for more.
+    random stuff i made.
   </p>
 
-  <div class="-mb-4 space-y-2">
+  <div class="mb-6 space-y-2">
     {
       allProjects.map((project) => {
         return (
@@ -33,4 +32,17 @@ const allProjects = await getCollection("projects");
       })
     }
   </div>
+
+  <p>
+    <a
+      class="group -mx-4 inline-flex items-center rounded-md px-4 py-2.5 font-semibold transition"
+      href="https://github.com/lukadev-0"
+    >
+      <span class="-mt-0.5">more on github</span>
+      <ArrowRight
+        class="ml-1 h-5 transition-transform group-hover:translate-x-1"
+        aria-hidden="true"
+      />
+    </a>
+  </p>
 </Section>

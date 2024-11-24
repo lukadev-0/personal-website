@@ -8,14 +8,14 @@ export type Props = LayoutProps;
 
 <Layout {...Astro.props}>
   <header>
-    <div class="mx-auto flex h-16 max-w-screen-sm items-center px-8">
+    <div class="mx-auto flex h-16 max-w-screen-sm items-center px-6">
       <a href="/">
-        <Logotype class="h-5" aria-label="lukadev" />
+        <Logotype class="h-4 md:h-5" aria-label="lukadev" />
       </a>
     </div>
   </header>
 
-  <div class="mx-auto -mt-16 max-w-screen-sm px-8">
+  <div class="mx-auto -mt-16 max-w-screen-sm px-6">
     <main class="min-h-screen pt-16">
       <slot />
     </main>
