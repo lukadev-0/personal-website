@@ -3,7 +3,12 @@ import BlogLayout from "../layouts/BlogLayout.astro";
 import Link from "../components/Link.astro";
 ---
 
-<BlogLayout title="404" description="page not found.">
+<BlogLayout
+  meta={{
+    title: "404",
+    description: "page not found.",
+  }}
+>
   <div
     class="-mt-16 flex h-screen flex-col items-center justify-center text-center"
   >

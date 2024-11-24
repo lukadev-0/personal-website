@@ -9,7 +9,12 @@ allBlogPosts.sort((a, b) => {
 });
 ---
 
-<BlogLayout title="blog" description="ramblings about software development.">
+<BlogLayout
+  meta={{
+    title: "blog",
+    description: "ramblings about software development.",
+  }}
+>
   <div class="py-24">
     <h1 class="mb-4 text-4xl font-bold">blog</h1>
     <p class="mb-12 text-lg font-medium text-gray-600 dark:text-gray-400">

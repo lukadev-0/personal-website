@@ -9,7 +9,13 @@ import Footer from "../components/Footer.astro";
 
 <Layout
   class="opacity-0 [--nav-height:theme(spacing.16)] lg:[--nav-height:theme(spacing.20)]"
-  description="i enjoy building things on the web and roblox."
+  meta={{
+    title: {
+      htmlTitle: "lukadev",
+      ogTitle: "hi, i'm luka.",
+    },
+    description: "i enjoy building things on the web and roblox.",
+  }}
 >
   <Header />
   <main class="mx-auto flex max-w-screen-xl flex-col px-6 lg:flex-row">

@@ -2,12 +2,32 @@
 import "@fontsource-variable/plus-jakarta-sans";
 
 export interface Props {
-  title?: string;
-  description: string;
+  meta: Meta;
   class?: string;
 }
 
-const { title, description, class: className } = Astro.props;
+export interface Meta {
+  title:
+    | string
+    | {
+        htmlTitle: string;
+        ogTitle: string;
+      };
+  type?: string;
+  description: string;
+  image?: string;
+  url?: string;
+}
+
+const { meta, class: className } = Astro.props;
+
+const htmlTitle =
+  typeof meta.title === "string"
+    ? `${meta.title} - lukadev`
+    : meta.title.htmlTitle;
+const ogTitle =
+  typeof meta.title === "string" ? meta.title : meta.title.ogTitle;
+const canonicalUrl = new URL(meta.url ?? Astro.url.pathname, Astro.site);
 ---
 
 <html lang="en">
@@ -17,13 +37,21 @@ const { title, description, class: className } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="canonical" href={canonicalUrl} />
 
-    <title>{title ? `${title} - lukadev` : "lukadev"}</title>
-    <meta name="description" content={description} />
+    <title>{htmlTitle}</title>
+    <meta name="description" content={meta.description} />
     <meta property="og:site_name" content="lukadev" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title ?? "hi, i'm luka."} />
-    <meta property="og:description" content={description} />
+    <meta property="og:type" content={meta.type ?? "website"} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={meta.description} />
+    <meta
+      property="og:image"
+      content={new URL(meta.image ?? "/default-og-image.webp", Astro.url)}
+    />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:site" content="@lukadev_0" />
 
     <script is:inline>
       const favicon = document.getElementById("favicon");
