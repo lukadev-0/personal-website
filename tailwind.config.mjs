@@ -43,7 +43,7 @@ export default {
             "--tw-prose-captions": theme("colors.gray[700]"),
             "--tw-prose-code": theme("colors.gray[900]"),
             "--tw-prose-pre-code": theme("colors.gray[100]"),
-            "--tw-prose-pre-bg": theme("colors.gray[200]"),
+            "--tw-prose-pre-bg": theme("colors.gray[100]"),
             "--tw-prose-th-borders": theme("colors.gray[300]"),
             "--tw-prose-td-borders": theme("colors.gray[200]"),
             "--tw-prose-invert-body": theme("colors.gray[300]"),
