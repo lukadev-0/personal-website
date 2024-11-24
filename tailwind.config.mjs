@@ -70,6 +70,12 @@ export default {
                 "text-decoration-color": "currentColor",
               },
             },
+            img: {
+              width: `calc(100% + 2 * ${theme("spacing.6")})`,
+              "max-width": "100vw",
+              "margin-left": `-${theme("spacing.6")}`,
+              "margin-right": `-${theme("spacing.6")}`,
+            },
           },
         },
       }),
