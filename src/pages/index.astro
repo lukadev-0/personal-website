@@ -8,7 +8,7 @@ import Footer from "../components/Footer.astro";
 ---
 
 <Layout
-  class="opacity-0 [--nav-height:theme(spacing.16)] lg:[--nav-height:theme(spacing.20)]"
+  class="opacity-0 [--nav-height:--spacing(16)] lg:[--nav-height:--spacing(20)]"
   meta={{
     title: {
       htmlTitle: "lukadev",
@@ -18,9 +18,9 @@ import Footer from "../components/Footer.astro";
   }}
 >
   <Header />
-  <main class="mx-auto flex max-w-screen-xl flex-col px-6 lg:flex-row">
+  <main class="mx-auto flex max-w-(--breakpoint-xl) flex-col px-6 lg:flex-row">
     <Side />
-    <div class="flex-grow pb-24 pt-4" id="sections">
+    <div class="grow pb-24 pt-4" id="sections">
       <div class="-mx-3 mb-16 space-y-3 md:mx-0 md:space-y-8 lg:space-y-12">
         <Projects />
         <Blog />

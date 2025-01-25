@@ -1,5 +1,6 @@
 ---
 import "@fontsource-variable/plus-jakarta-sans";
+import "../globals.css";
 
 export interface Props {
   meta: Meta;
@@ -77,26 +78,4 @@ const canonicalUrl = new URL(meta.url ?? Astro.url.pathname, Astro.site);
   >
     <slot />
   </body>
-
-  <style is:global>
-    .astro-code {
-      background-color: theme(colors.gray.100 / 0.5) !important;
-      border: 1px solid theme(colors.gray.200);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .astro-code,
-      .astro-code span {
-        color: var(--shiki-dark) !important;
-        font-style: var(--shiki-dark-font-style) !important;
-        font-weight: var(--shiki-dark-font-weight) !important;
-        text-decoration: var(--shiki-dark-text-decoration) !important;
-      }
-
-      .astro-code {
-        background-color: theme(colors.gray.800) !important;
-        border: 1px solid theme(colors.gray.700);
-      }
-    }
-  </style>
 </html>
