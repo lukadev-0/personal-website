@@ -1,18 +1,18 @@
 ---
-import { getCollection } from "astro:content";
-import BlogLayout from "../../layouts/BlogLayout.astro";
+import { getCollection, render } from "astro:content";
 import ArrowLeft from "../../components/icons/ArrowLeft.astro";
+import BlogLayout from "../../layouts/BlogLayout.astro";
 
 export async function getStaticPaths() {
   const allBlogPosts = await getCollection("blog");
   return allBlogPosts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <BlogLayout
@@ -20,7 +20,7 @@ const { Content } = await post.render();
     title: post.data.title,
     description: post.data.description,
     type: "article",
-    image: `/og-image/blog/${post.slug}.webp`,
+    image: `/og-image/blog/${post.id}.webp`,
   }}
 >
   <div class="text-right">

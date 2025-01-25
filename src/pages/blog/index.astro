@@ -1,6 +1,6 @@
 ---
-import BlogLayout from "../../layouts/BlogLayout.astro";
 import { getCollection } from "astro:content";
+import BlogLayout from "../../layouts/BlogLayout.astro";
 
 const allBlogPosts = await getCollection("blog");
 
@@ -36,7 +36,7 @@ allBlogPosts.sort((a, b) => {
           <article>
             <a
               class="-mx-4 block rounded-lg p-4 transition hover:bg-gray-100 md:-mx-5 md:p-5 dark:hover:bg-gray-800"
-              href={`/blog/${blog.slug}/`}
+              href={`/blog/${blog.id}/`}
             >
               <h3 class="mb-0.5 font-bold text-gray-800 dark:text-gray-200">
                 {blog.data.title}
