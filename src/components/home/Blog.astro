@@ -1,7 +1,7 @@
 ---
-import Section from "./Section.astro";
-import ArrowRight from "../icons/ArrowRight.astro";
 import { getCollection } from "astro:content";
+import ArrowRight from "../icons/ArrowRight.astro";
+import Section from "./Section.astro";
 
 const allBlogPosts = await getCollection("blog");
 
@@ -12,7 +12,7 @@ allBlogPosts.splice(5);
 ---
 
 <Section title="blog">
-  <p class="mb-6 mt-2 font-medium text-gray-700 dark:text-gray-400">
+  <p class="mt-2 mb-6 font-medium text-gray-700 dark:text-gray-400">
     ramblings about software development.
   </p>
 
@@ -23,7 +23,7 @@ allBlogPosts.splice(5);
           <article>
             <a
               class="-mx-4 block rounded-lg p-4 transition hover:bg-gray-200 md:-mx-5 md:p-5 dark:hover:bg-gray-700/50"
-              href={`/blog/${blog.slug}/`}
+              href={`/blog/${blog.id}/`}
             >
               <h3 class="mb-0.5 font-bold text-gray-800 dark:text-gray-200">
                 {blog.data.title}
