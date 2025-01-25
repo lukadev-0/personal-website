@@ -13,11 +13,11 @@ export async function getStaticPaths() {
 export const GET: APIRoute = async ({ params }) => {
   const post = await getEntry(
     "blog",
-    params.id as CollectionEntry<"blog">["id"],
+    params.slug as CollectionEntry<"blog">["id"],
   );
 
   if (!post) {
-    throw new Error(`post '${params.id}' not found`);
+    throw new Error(`post '${params.slug}' not found`);
   }
 
   const svg = await generateBlogImageSvg({ post });

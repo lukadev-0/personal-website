@@ -1,7 +1,7 @@
 import type { CollectionEntry } from "astro:content";
 import satori, { type SatoriOptions } from "satori";
 
-import plusJakartaSans400Normal from "@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-400-normal.woff?arraybuffer";
+import plusJakartaSans600Normal from "@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-600-normal.woff?arraybuffer";
 import plusJakartaSans800Normal from "@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-800-normal.woff?arraybuffer";
 
 export type Props = {
@@ -10,16 +10,16 @@ export type Props = {
 
 const colors = {
   gray: {
-    50: "#EFEFFA",
-    100: "#E3E3F2",
-    200: "#D9D9E9",
-    300: "#CECEDF",
-    400: "#ACACC1",
-    500: "#8A8AA1",
-    600: "#4C4C5C",
-    700: "#2E2E3A",
-    800: "#131318",
-    900: "#0C0C0F",
+    50: "#efeffa",
+    100: "#e3e3f2",
+    200: "#dbdbe7",
+    300: "#d1d1dd",
+    400: "#b0b0be",
+    500: "#8e8ea1",
+    600: "#4c4c5c",
+    700: "#2b2b35",
+    800: "#14141b",
+    900: "#0e0e12",
     950: "#060609",
   },
   dark: "#060609",
@@ -32,8 +32,8 @@ const satoriOptions: SatoriOptions = {
   fonts: [
     {
       name: "Plus Jakarta Sans",
-      data: plusJakartaSans400Normal,
-      weight: 400,
+      data: plusJakartaSans600Normal,
+      weight: 600,
       style: "normal",
     },
     {
@@ -54,7 +54,7 @@ export function BlogImage({ post }: Props) {
     <div
       style={{
         display: "flex",
-        padding: "80px",
+        padding: "120px",
         background: colors.dark,
         color: colors.light,
         height: "100%",
@@ -65,36 +65,34 @@ export function BlogImage({ post }: Props) {
     >
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "24px",
-        }}
-      >
-        <Logotype height="40" />
-        <div
-          style={{
-            fontSize: "32px",
-            fontWeight: "800",
-            background: colors.light,
-            color: colors.dark,
-            padding: "14px 24px",
-            borderRadius: "12px",
-            paddingTop: "12px",
-          }}
-        >
-          blog
-        </div>
-      </div>
-      <div
-        style={{
           height: "50%",
           fontWeight: "800",
-          fontSize: "90px",
-          lineHeight: "1.1",
-          marginBottom: "32px",
+          fontSize: "80px",
         }}
       >
         {post.data.title}
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Logotype height="36" />
+        <div
+          style={{
+            fontSize: "32px",
+            fontWeight: "600",
+            color: colors.gray[400],
+          }}
+        >
+          {post.data.date.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </div>
       </div>
     </div>
   );
